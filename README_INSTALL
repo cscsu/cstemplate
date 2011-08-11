@@ -28,7 +28,7 @@ Installation Instructions:
 		chmod the installation directory
 			eg: chmod -R 544 cs100
 		chmod the php files to be readable only by the php instance
-			eg chmod -R 511 cs100/*.php
+			eg find . -type f -name '*.php' -exec chmod 511 {} \;
 		chmod cache to be writable and readable by the software
 			eg: chmod -R 711 cache
 		chmod templates/content to be writable and readable by the software
@@ -38,7 +38,7 @@ Installation Instructions:
 
 		chmod example script:
 			chmod -R 544 cs100
-			chmod -R 511 cs100/*.php
+			find ./cs100 -type f -name '*.php' -exec chmod 511 {} \;
 			chmod -R 711 cs100/cache
 			chmod -R 711 cs100/templates/content
 			chmod -R 711 cs100/config
