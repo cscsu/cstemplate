@@ -1,0 +1,4 @@
+config/config.php
+gsRender/gsRender_compiled/*.php
+cache/gsRender/gsRender_compiled/*.php
+*~

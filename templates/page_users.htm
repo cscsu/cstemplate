@@ -1,0 +1,34 @@
+
+<div class="ctbl">
+<a name="registered_users"></a>
+<table class="users" summary="Current Users">
+<caption class="users">Current Users</caption>
+<thead>
+<tr class="users">
+<th scope="col" id="c1">Name</th>
+<th scope="col" id="c2">Email</th>
+</tr>
+<thead>
+<tbody>
+<!--[foreach from=$siteusers item=cuser]-->
+<tr>
+<th scope="row"><!--[$cuser.firstname]--> <!--[$cuser.lastname]--></th>
+<td><!--[$cuser.email]--></td>
+</tr>
+<!--[/foreach]-->
+</tbody>
+</table>
+</div>
+<div class="form"><h2>Users</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=users" name="Add User Form" title="Add User Form" method="post">
+<fieldset>
+<legend>Add User</legend>
+<div class="field"><label for="email">Email:</label> <input id="email"  class="input" type="text" name="email" value="<!--[$adduser_email]-->" /></div>
+<div class="field"><label for="submit">Send Registration Token</label><input type="submit" id="submit" class="input" type="submit" name="submit" value="Submit" /></div>
+</fieldset>
+</form>
+
+</div>

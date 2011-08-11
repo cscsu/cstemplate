@@ -1,0 +1,18 @@
+<div class="register"><h2>Register</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=register" name="Register Form" title="Register Form" method="post">
+<input type="hidden" name="registrationtoken" value="<!--[$registertoken]-->" />
+<fieldset>
+<legend>Register</legend>
+<div class="field"><label for="firstname">First Name:</label> <input id="firstname"  class="input" type="text" name="firstname" value="<!--[$register_username]-->" /></div>
+<div class="field"><label for="lastname">Last Name:</label> <input id="lastname"  class="input" type="text" name="lastname" value="<!--[$register_lastname]-->" /></div>
+<div class="field"><label for="username">Desired Username:</label> <input id="username"  class="input" type="text" name="username" value="<!--[$register_username]-->" /></div>
+<div class="field"><label for="email">Email:</label> <input id="email"  class="input" type="text" name="email" value="<!--[$register_email]-->" /></div>
+<div class="field"><label for="password">Desired Password:</label> <input id="password"  class="input" type="password" length="30" name="password" value="" /></div>
+<div class="field"><label for="submit">Register</label><input type="submit" id="submit" class="input" type="submit" name="submit" value="Submit" /></div>
+</fieldset>
+</form>
+
+</div>

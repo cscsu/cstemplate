@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><!--[$config.sitename]--><!--[$pageinfo]--></title>
+	<link rel="stylesheet" type="text/css"
+     		href="<!--[$pagedir]-->styles/<!--[$config.style]-->/common.css" />
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="Content-Style-Type" content="text/css" />
+	<!--[if $redirect]-->
+		<meta http-equiv="refresh" content="2;URL=<!--[if $redirecturl]--><!--[$redirecturl]--><!--[else]--><!--[$config.siteurl]--><!--[/if]-->" />
+	<!--[/if]-->
+	<script type="text/javascript" src="<!--[$pagedir]-->js/jquery.min.js"></script>
+	<noscript>jQuery Javascript library</noscript>
+</head>
+<body  id="<!--[$pageid]-->">
+	<div id="page">
+		<div id="banner">
+			<div align="left">
+				<a title="CSU Welcome Page" href="http://welcome.colostate.edu/">
+					    <img class = "picLeft" 
+    							align= "left" src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/co_state_univ_fr_grn_glow.png"
+    							alt="Colorado State University"/>
+				</a>
+			</div>
+			<div id="topTitle">
+				<p class="courseTitle"><!--[$config.sitename]--></p>
+				<p class="courseSubTitle"><!--[$config.subsite]--></p>
+				<p class="pageinfo"><!--[$pageinfo]--></p>
+			</div>
+		</div>
+
+		<div id="navigation">
+			<ul>
+				<!--[foreach from=$menu_categories item=category]-->
+					<!--[foreach from=$category.menu item=menuitem]-->
+						<li>
+							<a class="navi" 
+								<!--[if $menuitem.target ne "" && $menuitem.target ne null]-->
+								target="<!--[$menuitem.target]-->"
+								<!--[/if]--> 
+								href="<!--[if $menuitem.page ne "" && $menuitem.page ne null]-->?page=<!--[$menuitem.page]-->
+								<!--[else]-->
+								<!--[$menuitem.url]-->
+								<!--[/if]-->"><!--[$menuitem.caption]-->
+							</a>
+						</li> 
+					<!--[/foreach]-->
+				<!--[/foreach]-->
+			</ul>
+		</div>
+		<div id="contents">
+

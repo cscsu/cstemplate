@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pageid` int(11) NOT NULL,
+  `position` int(11) NOT NULL,
+  `direct` tinyint(4) NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL,
+  `url` text NOT NULL,
+  `requireslogin` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -1,0 +1,42 @@
+<h2>Installation Overview</h2>
+<div class="info">
+The database has been successfully installed!<br/>
+<br/>
+On this page you will input the configuration values for the website
+<br/>
+</div>
+<div class="form"><h2>Configuration Setup</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="install.php" name="Installation Form" title="Installation Form" method="post">
+<input type="hidden" name="writeconfig" id="writeconfig" value="writeconfig" />
+<input type="hidden" name="db_host" value="<!--[$db_host]-->" />
+<input type="hidden" name="db_name"value="<!--[$db_name]-->" />
+<input type="hidden" name="db_user" value="<!--[$db_user]-->" />
+<input type="hidden" name="db_password" value="<!--[$db_password]-->" />
+<input type="hidden" name="db_prefix" value="<!--[$db_prefix]-->" />
+<fieldset>
+<legend>Database Setup</legend>
+	<div class="field">
+		<label for="sitename">Site Name (eg "CS100 - Introduction to Computer Science"):</label> 
+		<input id="sitename" class="input" type="text" name="sitename" value="<!--[$sitename]-->" />
+	</div>
+	<div class="field">
+		<label for="subtitle">Sub Title (eg "Fall 2011"):</label> 
+		<input id="subtitle" class="input" type="text" name="subsite" value="<!--[$subsite]-->" />
+	</div>
+	<div class="field">
+		<label for="siteid">Cookie ID (eg "cs100"):</label> 
+		<input id="siteid" class="input" type="text" name="siteid" value="<!--[$siteid]-->" />
+	</div>
+	<div class="field">
+		<label for="siteurl">Base URL (eg "http://www.cs.colostate.edu/~cs100":</label> 
+		<input id="siteurl" class="input" type="text" name="siteurl" value="<!--[$siteurl]-->" />
+	</div>
+
+
+<div class="field"><label for="submit">Click to write the configuration</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Write Config" /></div>
+</fieldset>
+</form>
+</div>

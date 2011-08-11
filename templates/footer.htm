@@ -1,0 +1,31 @@
+   </div>
+
+	<div id="footer">
+    <div id="footerLeft">
+    	<!--[if $user ne null]-->
+       User: <!--[if $user->isGuest() eq true]-->Guest <a class="urlfoot" href="?page=login">[ Login ]</a><!--[else]--><!--[$user->getFullName()]--><!--[/if]-->
+		<!--[/if]-->    
+    </div> 
+    <div id="footerRight">
+       <a href="http://www.cs.colostate.edu">
+          <img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/csBuildingLowerRight.png"
+          alt="CS Department" height="48" width="185" /></a>
+    </div> 
+    <div id="footerCenter">
+        <a class="urlfoot" href="http://admissions.colostate.edu">Apply to CSU</a> |
+        <a class="urlfoot" href="http://welcome.colostate.edu/info-contact.aspx">Contact CSU</a> |
+        <a class="urlfoot" href="http://welcome.colostate.edu/info-disclaimer.aspx">Disclaimer</a> |
+        <a class="urlfoot" href="http://welcome.colostate.edu/info-equalop.aspx">Equal Opportunity</a>
+        <br />
+        Colorado State University, Fort Collins, CO 80523 USA<br />
+        &copy; 2011 Colorado State University
+    </div>
+    <div id="footerClear"> 
+     &nbsp;
+     </div> 
+</div>
+
+</div>
+    
+</body>
+</html>

@@ -1,0 +1,312 @@
+@charset "UTF-8";
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-image: url(images/parchment.png);
+	font-size: 80%;
+	padding: 0px;
+	margin: 0px;
+}
+
+#page {
+	border-style: ridge;
+	border-width: thick;
+	min-width: 760px;
+	border-color: #cc9900;
+	padding: 0px;
+	margin: 16px;
+}
+
+#banner {
+	background-color: #FFFFCC;
+	min-width: 760px;
+}
+
+#topTitle {
+	display: block;
+	height: 120px;
+	min-width: 300px;
+	text-align: center;
+}
+
+#navigation {
+	background-color: #030;
+	background-position: center;
+	height: 3em;
+	min-width: 760px;
+	text-align: center;
+	padding-top: 4px;
+	border-top-width: thin;
+    border-top-color :   #333333;
+	border-top-style: groove;
+}
+
+#contents {
+	background-color: #FFFFFF;
+	padding-left: 8px;
+	padding-right: 8px;
+	padding-top: 8px;
+	min-height: 45em;
+	padding-bottom: 8px;
+	min-width: 744px
+}
+
+#contents_p1 {
+	width: 40em;
+}
+
+#footer {
+	font-size: 11px;
+	background-color: #030;
+	/* height: 4em; */
+	width: 100%;
+	min-width: 760px;
+	color: #FFFFFF;
+	padding-top: 8px;
+	padding-bottom: 4px;
+	border-bottom-width: thin;
+	border-bottom-color: #333333;
+	border-bottom-style: groove;
+}
+
+#footerCenter {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: auto;
+}
+
+#footerLeft {
+	float: left;
+	margin-left: 12px;
+	height: 4em;
+	text-align: left;
+}
+
+#footerRight {
+	float: right;
+	margin-right: 12px;
+	height: 4em;
+}
+
+#footerClearBottom {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	float: none;
+	clear: both;
+}
+
+#whowhatwhere {
+	float: right;
+	border-style: solid;
+	border-width: 1px;
+	margin-left: 50px;
+	margin-right: 20px;
+	padding: 10px 10px 10px 15px;
+}
+
+#news {
+	clear: right;
+	margin-left: 16px;
+	text-align: left;
+	height: auto;
+	width: 100%;
+	color: #CC0000;
+	text-shadow: #990000;
+}
+
+p.courseTitle {
+	margin-top: 0px;
+	margin-bottom: 2px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 10px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 700;
+	font-size: 175%;
+}
+
+p.courseSubTitle {
+	margin: 2px;
+	color: black;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 133%;
+}
+
+p.pageHeading {
+	text-align: center;
+	font-size: 120%;
+	font-weight: bold;
+	margin: 8px 0px 0px 0px;
+}
+
+p.credits {
+	font-size: 10px;
+	margin-left: 16px;
+}
+
+.navMenuItem {
+	font-size: 14px;
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+div.ctbl {
+	align: center;
+	text-align: center;
+}
+
+table.status {
+	border: 0px solid #333333;
+	border-spacing: 5px 2px;
+	padding: 5px;
+	align: center;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+   
+}
+
+td,tr,th,thead,tbody .status {
+	border: 1px;
+	border: 1px solid #333333;
+	padding: 5px;
+	align: center;
+	text-align: center;
+}
+
+caption.status {
+	font-size: 1.5em;
+	font-weight: bold;
+	align: center;
+	text-align: center;
+}
+
+
+table.week {
+	background-color: #CCFFBB;
+	width: 670px;
+	border: 0px;
+	border-spacing: 0px;
+	padding: 0px;
+}
+
+td.day {
+	padding: 4px;
+	vertical-align: top;
+	width: 90px;
+}
+
+td.act {
+	padding: 4px;
+	vertical-align: top;
+}
+
+td.tight {
+	padding: 0px;
+	margin: 0px;
+}
+
+.indented {
+	margin-left: 16px;
+}
+
+p.tight {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* Styles associated with slide notes */
+div.noteFrame {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	background-image: url(./images/notesTile.png);
+	background-repeat: repeat-y;
+}
+
+div.noteText {
+	margin: 24px;
+	text-align: justify;
+}
+
+p.noteEditLink {
+	width: 750px;
+	text-align: right;
+}
+
+form.comment {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+}
+
+/* Styles controlling links */
+p.courseSubTitle a:link,p.courseSubTitle a:visited,p.courseSubTitle a:hover,p.courseSubTitle a:active
+	{
+	text-decoration: none;
+	color: #000000;
+}
+
+div.slide {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 2px;
+	text-align: center;
+}
+
+img.slide {
+	display: block;
+	width: 800px;
+	height: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a.navi {
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+a.navi:link {
+	color: #FFFFFF;
+}
+
+a.navi:visited {
+	color: #FFFFFF;
+}
+
+a.navi:hover {
+	color: #FFCC00;
+}
+
+a.navi:active {
+	color: #FFCC00;
+}
+
+a.foot:link {
+	color: #FFFFFF;
+}
+
+a.foot:visited {
+	color: #FFCC00;
+}
+
+a.foot:hover {
+	color: #FFFFFF;
+}
+
+a.foot:active {
+	color: #FFCC00;
+}
+
+a.code {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 120%;
+}

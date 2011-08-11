@@ -1,0 +1,50 @@
+   Copyright 2011
+	Caleb Champlin (champlin@cs.colostate.edu)
+	Jared Koontz (koontz@cs.colostate.edu)
+	Austin Walkup (walkup@cs.colostate.edu)
+	Ross Beveridge (beveridge@cs.colostate.edu)
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+Installation Requirements:
+
+	PHP 4.3.0 or greater
+	Web Server (Apache recommended)
+	MySQL database
+
+Installation Instructions:
+
+	Step 1:
+		chmod the installation directory
+			eg: chmod -R 411 cs100
+		chmod cache to be writable and readable by the software
+			eg: chmod -R 711 cache
+		chmod templates/content to be writable and readable by the software
+			eg: chmod -R 711 templates/content
+		chmod config to be writable and readable by the software
+			eg: chmod -R 711 config
+
+		chmod example script:
+			chmod -R 411 cs100
+			chmod -R 711 cs100/cache
+			chmod -R 711 cs100/templates/content
+			chmod -R 711 cs100/config
+	Step 2:
+		In a browser navigate to install/install.php under that directory.
+
+	Step 3:
+		chmod the config directory to be readable and executable by the
+		software
+			eg: chmod -R 411 config	
+
+

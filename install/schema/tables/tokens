@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

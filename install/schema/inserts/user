@@ -1,0 +1,7 @@
+INSERT INTO <!--[dbprefix]-->users (firstname,lastname,username,password,salt,email) 
+	VALUES ('<!--[firstname]-->',
+		'<!--[lastname]-->',
+		'<!--[username]-->',
+		'<!--[password]-->',
+		'<!--[salt]-->',
+		'<!--[email]-->')

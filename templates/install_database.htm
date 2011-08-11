@@ -1,0 +1,65 @@
+<h2>Installation Overview</h2>
+<div class="info">
+On this page you will input the information necessary to setup the database. Please ensure ahead of time that you have a mysql database created. You will also need to input information for the original web site account
+<br/>
+</div>
+<div class="form"><h2>Database Setup</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="install.php" name="Installation Form" title="Installation Form" method="post">
+<input type="hidden" name="createdb" id="createdb" value="createdb" />
+<fieldset>
+<legend>Database Setup</legend>
+	<div class="field">
+		<label for="adminuser">Admin Username:</label> 
+		<input id="adminuser" class="input" type="text" name="username" value="<!--[$username]-->" />
+	</div>
+	<div class="field">
+		<label for="adminpass1">Admin Password:</label> 
+		<input id="adminpass1" class="input" type="password" name="password1" value="" />
+	</div>
+	<div class="field">
+		<label for="adminpass2">Confirm Admin Password:</label> 
+		<input id="adminpass2" class="input" type="password" name="password2" value="" />
+	</div>
+	<div class="field">
+		<label for="adminfirst">Admin Firstname:</label> 
+		<input id="adminfirst" class="input" type="text" name="firstname" value="<!--[$firstname]-->" />
+	</div>
+	<div class="field">
+		<label for="adminlast">Admin Lastname:</label> 
+		<input id="adminlast" class="input" type="text" name="lastname" value="<!--[$lastname]-->" />
+	</div>	
+	<div class="field">
+		<label for="adminemail">Admin Email:</label> 
+		<input id="adminemail" class="input" type="text" name="email" value="<!--[$email]-->" />
+	</div>	
+	<div class="field">
+		<label for="dbhost">Database Host (eg "faure.cs.colostate.edu"):</label> 
+		<input id="dbhost" class="input" type="text" name="db_host" value="<!--[$db_host]-->" />
+	</div>
+	<div class="field">
+		<label for="dbname">Database Name:</label> 
+		<input id="dbname" class="input" type="text" name="db_name" value="<!--[$db_name]-->" />
+	</div>
+	<div class="field">
+		<label for="dbuser">Database Username:</label> 
+		<input id="dbuser" class="input" type="text" name="db_username" value="<!--[$db_username]-->" />
+	</div>
+	<div class="field">
+		<label for="dbpass">Database Password:</label> 
+		<input id="dbpass" class="input" type="text" name="db_password" value="<!--[$db_password]-->" />
+	</div>
+	<div class="field">
+		<label for="dbprefix">Table Prefix (eg "cs100_"):</label> 
+		<input id="dbprefix" class="input" type="text" name="db_prefix" value="<!--[$db_prefix]-->" />
+	</div>
+
+
+
+
+<div class="field"><label for="submit">Click to setup the database</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Install" /></div>
+</fieldset>
+</form>
+</div>

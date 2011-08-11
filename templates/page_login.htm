@@ -1,0 +1,15 @@
+<div class="login"><h2>Login</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=login" name="Login Form" title="Login Form" method="post">
+<fieldset>
+<legend>Login</legend>
+<div class="field"><label for="login">
+<div class="field"><label for="username">Username:</label> <input id="username"  class="input" type="text" name="username" value="<!--[$login_username]-->" /></div>
+<div class="field"><label for="password">Password:</label> <input id="password"  class="input" type="password" length="30" name="password" value="<!--[$login_password]-->" /></div>
+<div class="field"><label for="submit">Login</label><input type="submit" id="submit" class="input" type="submit" name="submit" value="Submit" /></div>
+</fieldset>
+</form>
+
+</div>

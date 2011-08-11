@@ -1,0 +1,33 @@
+.header
+{
+	height: 50px;
+	background-color: #666;
+	margin-bottom: 10px;
+}
+
+.nav
+{
+	float: left;
+	width: 180px;
+	height: 100%;
+	background-color: #999;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+}
+
+.content
+{
+	margin: 0 30px 10px 210px;
+	height: 100%;
+	background-color: #999;
+	padding-bottom: 20px;
+}
+
+.footer
+{
+	clear: both;
+	height: 50px;
+	background-color: #666;
+	margin-bottom: 10px;
+}
+
