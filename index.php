@@ -55,7 +55,7 @@ echo $render->fetch('header.htm');
 // Determine the appropriate page to fetch depending on content or core
 if (!$contentpage)
 {
-	echo $render->fetch('page_' . $page . '.htm');
+	echo $render->fetch('core_' . $page . '.htm');
 }
 else
 {

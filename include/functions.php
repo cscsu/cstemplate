@@ -313,7 +313,7 @@ function redirect($message, $url = null)
 	$render->assign('redirecturl',$url);
 	$render->assign('redirect_message', $message);
 	echo $render->fetch('header.htm');
-	echo $render->fetch('page_redirect.htm');
+	echo $render->fetch('core_redirect.htm');
 	echo $render->fetch('footer.htm');
 	die();
 }

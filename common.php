@@ -93,7 +93,7 @@ else
 }
 
 // Verify template existance for the page
-if (!file_exists("templates/page_" . $page . ".htm"))
+if (!file_exists("templates/core_" . $page . ".htm"))
 {
 	// If the page does not exist we will check if its a content page
 	// if not default to index
