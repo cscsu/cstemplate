@@ -26,6 +26,17 @@ Installation Instructions:
 
 	Step 1:
 		chmod the installation directory
+			eg: chmod -R 755 cs100
+	Step 2:
+		In a browser navigate to install/install.php under that directory.
+
+	Step 3:
+		chmod the config directory to be readable and executable by the
+		software
+			eg: chmod -R 511 config	
+
+	Step 4:
+		chmod the installation directory
 			eg: chmod -R 555 cs100
 		chmod the php files to be readable only by the php instance
 			eg find . -type f -name '*.php' -exec chmod 511 {} \;
@@ -42,12 +53,3 @@ Installation Instructions:
 			chmod -R 711 cs100/cache
 			chmod -R 711 cs100/templates/content
 			chmod -R 711 cs100/config
-	Step 2:
-		In a browser navigate to install/install.php under that directory.
-
-	Step 3:
-		chmod the config directory to be readable and executable by the
-		software
-			eg: chmod -R 511 config	
-
-
