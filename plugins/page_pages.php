@@ -92,8 +92,6 @@ function doPreEditPage()
 
 	}
 
-
-
 	if (!preg_match("/^[a-zA-Z0-9_]+$/i",$fields['edit']))
 	{
 		$errors[] = "Invalid page name";
@@ -160,10 +158,11 @@ function doEditPage()
 	$render->assign("editpage_pagename",$fields['pagename']);
 
 
-		$render->assign("editpage_pagetitle",$fields['pagetitle']);
+	$render->assign("editpage_pagetitle",$fields['pagetitle']);
 
 
-		$render->assign("editpage_pagecontent",$fields['pagecontent']);
+	$render->assign("editpage_pagecontent",$fields['pagecontent']);
+
 
 	if (!preg_match("/^[a-zA-Z0-9_]+$/i",$fields['pagename']))
 	{
@@ -242,7 +241,7 @@ function doAddPage()
 	{
 
 
-		$query = "INSERT INTO ".$db->prefix."pages (title,name) VALUES('".$db->escape($fields['pagetitle'])."','".$db->escape($fields['pagename'])."')";
+		$query = "INSERT INTO ".$db->prefix."pages (title,name) VALUES('".$db->escape($fields['pagetitle'])."','c".$db->escape($fields['pagename'])."')";
 		$result = $db->query($query);
 		return null;
 	}
