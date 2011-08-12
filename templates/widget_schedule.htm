@@ -1,0 +1,26 @@
+<div id= "classSchedule">
+<!--[foreach from=$schedule item=week]-->
+	<dt><!--[$week.title]--></dt>
+	<dd>
+	<!--[foreach from=$week.days item=item]-->
+			<div class="scheduleitem">
+				<div class="scheduleday"><!--[$item.day]--></div>
+				<div class="schedulematerials">
+				<!--[foreach from=$item.materials item=material]-->
+				<div class="schedulematerialtitle"><!--[$material.title]--></div>
+				<div class="schedulematerialresource"><!--[$material.resource]--></div>
+				<!--[/foreach]-->
+				</div>
+				<div class="schedulereadings">
+				<!--[foreach from=$item.readings item=reading]-->
+					<div class="schedulereadingtitle"><!--[$reading.title]--></div>
+					<div class="schedulereadingresource"><!--[$reading.resource]--></div>
+				<!--[/foreach]-->
+				</div>
+				<div class="schedulenotes"><!--[$item.notes]--></div>
+			</div>
+
+	<!--[/foreach]-->
+	</dd>
+<!--[/foreach]-->
+</div> 

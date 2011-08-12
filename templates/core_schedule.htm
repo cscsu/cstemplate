@@ -1,0 +1,69 @@
+<!--[widget name=schedule]-->
+
+<!--[if $edit eq true]-->
+<div class="form"><h2>Edit Scheduled Item</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=schedule" name="Edit Schedule Form" title="Edit Schedule Item Form" method="post">
+<fieldset>
+<legend>Edit Item</legend>
+<div class="field"><label for="itemdate">Date:</label> <input id="itemdate"  class="input" type="text" name="itemdate" value="<!--[$item_date]-->" /></div>
+<!--[counter start=-1 print=false]-->
+<!--[foreach from=$item_materialstitle item=material]-->
+<!--[counter assign=pos]-->
+<div class="field"><label for="materialstitle">Materials Title (eg "Overview"):</label> <input id="materialstitle"  class="input" type="text" name="materials_title[<!--[$pos]-->]" value="<!--[$item_materialstitle[$pos]]-->" /></div>
+<div class="field"><label for="materialsresource">Materials Resource (eg url or text):</label> <input id="materialsresource"  class="input" type="text" name="materials_resource[<!--[$pos]-->]" value="<!--[$item_materialsresource[$pos]]-->" /></div>
+<!--[/foreach]-->
+<a href onclick="addMaterial" href="javascript:void(0);">Add Additional Materials</a>
+<!--[counter start=-1 print=false]-->
+<!--[foreach from=$item_readingstitle item=reading]-->
+<!--[counter assign=pos]-->
+<div class="field"><label for="readingstitle">Assigned Reading Title (eg "Chapter 1"):</label> <input id="readingstitle"  class="input" type="text" name="readings_title[<!--[$pos]-->]" value="<!--[$item_readingstitle[$pos]]-->" /></div>
+<div class="field"><label for="readingsresource">Reading Resource (eg url or text):</label> <input id="readingsresource"  class="input" type="text" name="readings_resource[<!--[$pos]-->]" value="<!--[$item_readingsresource[$pos]]-->" /></div>
+<!--[/foreach]-->
+<a href onclick="addReading" href="javascript:void(0);">Add Additional Readings</a>
+<div class="field"><label for="itemnotes">Notes (html):</label><textarea id="itemnotes" class="input" rows="30" cols="70" name="itemnotes"><!--[$item_notes]--></textarea></div>
+<div class="field"><label for="submit">Edit Item</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" /></div>
+</fieldset>
+</form>
+</div>
+<!--[/if]-->
+<script>
+	$(function() {
+		$( "#datepicker" ).datepicker();
+	});
+	</script>
+<div class="form"><h2>Add Item to Schedule</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=schedule" name="Add Schedule Item Form" title="Add Schedule Item Form" method="post">
+<fieldset>
+<legend>Add Item</legend>
+<div class="field"><label for="itemdate">Date:</label> <input id="itemdate"  class="input" type="text" name="itemdate" value="<!--[$item_date]-->" /></div>
+<!--[counter start=-1 print=false]-->
+<!--[foreach from=$item_materialstitle item=material]-->
+<!--[counter assign=pos]-->
+<div class="field"><label for="materialstitle">Materials Title (eg "Overview"):</label> <input id="materialstitle"  class="input" type="text" name="materials_title[<!--[$pos]-->]" value="<!--[$item_materialstitle[$pos]]-->" /></div>
+<div class="field"><label for="materialsresource">Materials Resource (eg url or text):</label> <input id="materialsresource"  class="input" type="text" name="materials_resource[<!--[$pos]-->]" value="<!--[$item_materialsresource[$pos]]-->" /></div>
+<!--[foreachelse]-->
+<div class="field"><label for="materialstitle">Materials Title (eg "Overview"):</label> <input id="materialstitle"  class="input" type="text" name="materials_title[0]" value="" /></div>
+<div class="field"><label for="materialsresource">Materials Resource (eg url or text):</label> <input id="materialsresource"  class="input" type="text" name="materials_resource[0]" value="" /></div>
+<!--[/foreach]-->
+<a href onclick="addMaterial" href="javascript:void(0);">Add Additional Materials</a>
+<!--[counter start=-1 print=false]-->
+<!--[foreach from=$item_readingstitle item=reading]-->
+<!--[counter assign=pos]-->
+<div class="field"><label for="readingstitle">Assigned Reading Title (eg "Chapter 1"):</label> <input id="readingstitle"  class="input" type="text" name="readings_title[<!--[$pos]-->]" value="<!--[$item_readingstitle[$pos]]-->" /></div>
+<div class="field"><label for="readingsresource">Reading Resource (eg url or text):</label> <input id="readingsresource"  class="input" type="text" name="readings_resource[<!--[$pos]-->]" value="<!--[$item_readingsresource[$pos]]-->" /></div>
+<!--[foreachelse]-->
+<div class="field"><label for="readingstitle">Assigned Reading Title (eg "Overview"):</label> <input id="readingstitle"  class="input" type="text" name="readings_title[0]" value="" /></div>
+<div class="field"><label for="readingssresource">Reading Resource (eg url or text):</label> <input id="readingsresource"  class="input" type="text" name="readings_resource[0]" value="" /></div>
+<!--[/foreach]-->
+<a href onclick="addReading" href="javascript:void(0);">Add Additional Readings</a>
+<div class="field"><label for="itemnotes">Notes (html):</label><textarea id="itemnotes" class="input" rows="3" cols="30" name="itemnotes"><!--[$item_notes]--></textarea></div>
+<div class="field"><label for="submit">Add Item</label><input type="submit" id="submit" class="input" type="submit" name="submit_add" value="Submit" /></div>
+</fieldset>
+</form>
+</div>
