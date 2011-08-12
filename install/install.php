@@ -183,7 +183,7 @@ function writeConfig()
 
 
 	echo $render->fetch('header.htm');
-	echo $render->fetch('install_complete.htm');
+	echo $render->fetch('install_config.htm');
 	echo $render->fetch('footer.htm');
 	exit();
 }
