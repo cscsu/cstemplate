@@ -92,8 +92,8 @@ function doLogin()
 			// - Part of the user salt
 			// - The user id
 			// - The ip address
-			$token = hashPass($config['sitekey'] . "::" . substr($row['salt'],0,7), $fields['userid'] . "::" . $_SERVER['REMOTE_ADDR']);
-
+			$token = hashPass($config['sitekey'] . "::" . substr($row['salt'],0,7), $row['userid'] . "::" . $_SERVER['REMOTE_ADDR']);
+			
 			// Set the cookie
 			setcookie($config['siteid'], $row['userid'] . "|" . hashPass($row['userid'] . "::" . $_SERVER['REMOTE_ADDR'],$pass) . "|" . $token, 0, '/', "www.cs.colostate.edu", false);
 		
