@@ -37,10 +37,10 @@ class DBLayer
 		if ($this->link_id)
 		{
 			if (!@mysql_select_db($db_name, $this->link_id))
-				error('Unable to select database. MySQL reported: '.mysql_error(), __FILE__, __LINE__);
+				displayError('Unable to select database. MySQL reported: '.mysql_error());
 		}
 		else
-			error('Unable to connect to MySQL server. MySQL reported: '.mysql_error(), __FILE__, __LINE__);
+			displayError('Unable to connect to MySQL server. MySQL reported: '.mysql_error());
 
 		// Setup the client-server character set (UTF-8)
 		if (!defined('FORUM_NO_SET_NAMES'))
