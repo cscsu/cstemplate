@@ -1,7 +1,24 @@
 <h2>Installation Overview</h2>
 <div class="info">
-Congratulations the installation process is complete. Please chmod the configuration to be non world writeable as in the example below
-<div class="code">chmod 711 config/config.php</div>
+Congratulations the installation process is complete. Please chmod the installation as follows below
+<div class="code">		
+		chmod the installation directory
+			eg: chmod -R 555 cs100
+		chmod the php files to be readable only by the php instance
+			eg find . -type f -name '*.php' -exec chmod 511 {} \;
+		chmod cache to be writable and readable by the software
+			eg: chmod -R 711 cache
+		chmod templates/content to be writable and readable by the software
+			eg: chmod -R 711 templates/content
+		chmod config to be writable and readable by the software
+			eg: chmod -R 711 config
+
+		chmod example script:
+			chmod -R 555 cs100
+			find ./cs100 -type f -name '*.php' -exec chmod 511 {} \;
+			chmod -R 711 cs100/cache
+			chmod -R 711 cs100/templates/content
+			chmod -R 711 cs100/config</div>
 <br/>
 <br/>
 Please also delete the directory "install" under the root for the web template.
