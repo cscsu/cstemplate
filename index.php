@@ -59,6 +59,7 @@ if (!$contentpage)
 }
 else
 {
+	$render->secrutiy = true;
 	echo $render->fetch('content/page_' . $page . '.htm');
 }
 
