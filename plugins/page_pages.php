@@ -7,9 +7,9 @@ if ($user->isGuest() != true)
 {
 
 
-	$query = "SELECT * FROM ".$db->prefix."pages";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE widget=0";
 	$result = $db->query($query);
-	$users = array();
+	$pages = array();
 	if ($db->num_rows($result) > 0)
 	{
 		
@@ -19,6 +19,20 @@ if ($user->isGuest() != true)
 		}
 	}
 	$render->assign("pages",$pages);
+
+
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE widget=1";
+	$result = $db->query($query);
+	$widgets = array();
+	if ($db->num_rows($result) > 0)
+	{
+		
+		while ($row = $db->fetch_assoc($result))
+		{
+			$widgets[] = $row;
+		}
+	}
+	$render->assign("widgets",$widgets);
 
 
 	if (!empty($_POST['submit_add']))
@@ -35,7 +49,7 @@ if ($user->isGuest() != true)
 		}
 	}
 
-	if (!empty($_POST['submit_edit']))
+	else if (!empty($_POST['submit_edit']))
 	{
 		
 
@@ -50,7 +64,7 @@ if ($user->isGuest() != true)
 		}
 	}
 
-	if (!empty($_GET['edit']))
+	else if (!empty($_GET['edit']))
 	{
 		$render->assign("edit",true);
 		$errors = doPreEditPage();
@@ -59,6 +73,19 @@ if ($user->isGuest() != true)
 
 		{
 
+			$render->assign("errors",$errors);
+
+		}
+	}
+
+
+	else if (!empty($_GET['remove']))
+	{
+		$errors = doRemovePage();
+
+		if (!empty($errors))
+
+		{
 			$render->assign("errors",$errors);
 
 		}
@@ -79,7 +106,7 @@ function doPreEditPage()
 	global $user;
 	$errors = array();
 
-	$fields = validateFields($_GET, array("edit"=>true,));
+	$fields = validateFields($_GET, array("edit"=>true));
 
 
 	foreach ($fields as $key => $value)
@@ -103,7 +130,7 @@ function doPreEditPage()
 
 		return $errors;
 
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['edit'])."' LIMIT 1";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['edit'])."' AND widget=0 LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) <= 0)
@@ -174,7 +201,7 @@ function doEditPage()
 	if (!empty($errors))
 		return $errors;
 
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['pagename'])."' LIMIT 1";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['pagename'])."' AND widget=0 LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) <= 0)
@@ -186,16 +213,87 @@ function doEditPage()
 	{
 		
 
-		$query = "UPDATE ".$db->prefix."pages SET title='".$db->escape($fields['pagetitle'])."' WHERE name='".$db->escape($fields['pagename'])."'";
+		$row = $db->fetch_assoc($result);
+		
+
+		$query = "UPDATE ".$db->prefix."pages SET title='".$db->escape($fields['pagetitle'])."' WHERE widget=0 AND name='".$db->escape($fields['pagename'])."'";
 		$result = $db->query($query);
 
+
 		file_put_contents("templates/content/page_" . $fields['pagename'] .".htm", $fields['pagecontent']);
+		redirect("Page successfully modified","?page=pages");
+		return null;
+		
+	}
+		
+	return $errors;
+
+}
+
+
+
+function doRemovePage()
+{
+	global $db;
+	global $config;
+	global $render;
+	global $user;
+	$errors = array();
+
+	$fields = validateFields($_GET, array("remove"=>true));
+
+
+	foreach ($fields as $key => $value)
+
+	{
+
+		if ($value === -1)
+
+			$errors[] = "Missing " . $key . " field";
+
+	}
+
+
+
+	if (!preg_match("/^[a-zA-Z0-9_]+$/i",$fields['remove']))
+	{
+		$errors[] = "Invalid page name";
+
+
+	}
+	
+	if (!empty($errors))
+		return $errors;
+
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['remove'])."' AND widget=0 LIMIT 1";
+	$result = $db->query($query);
+
+	if ($db->num_rows($result) <= 0)
+	{
+		$errors[] = "No such page exists";	
+	}
+
+	if (empty($errors))
+	{
+		$row = $db->fetch_assoc($result);
+		
+		$query = "DELETE FROM ".$db->prefix."menu WHERE pageid='".intval($row['id'])."'";
+		$result = $db->query($query);
+
+		$query = "DELETE FROM ".$db->prefix."pages WHERE widget=0 AND name='".$db->escape($fields['remove'])."'";
+		$result = $db->query($query);
+
+		unlink("templates/content/page_" . $fields['remove'] .".htm");
+
+		redirect("The page has been removed", "?page=pages");
+
 		return null;
 	}
 		
 	return $errors;
 
 }
+
 
 function doAddPage()
 {
@@ -229,7 +327,10 @@ function doAddPage()
 	if (!empty($errors))
 		return $errors;
 
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['pagename'])."' LIMIT 1";
+
+	$fields['pagename'] = 'c' . strtolower($fields['pagename']);
+
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['pagename'])."' AND widget=0 LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) > 0)
@@ -241,8 +342,10 @@ function doAddPage()
 	{
 
 
-		$query = "INSERT INTO ".$db->prefix."pages (title,name) VALUES('".$db->escape($fields['pagetitle'])."','c".$db->escape($fields['pagename'])."')";
+		$query = "INSERT INTO ".$db->prefix."pages (title,name) VALUES('".$db->escape($fields['pagetitle'])."','".$db->escape($fields['pagename'])."')";
 		$result = $db->query($query);
+		file_put_contents("templates/content/page_" . $fields['pagename'] .".htm", $fields['pagecontent']);
+		redirect("Page successfully added","?page=pages");
 		return null;
 	}
 		
