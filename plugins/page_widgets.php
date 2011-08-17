@@ -181,7 +181,7 @@ function doEditWidget()
 	if (!empty($errors))
 		return $errors;
 
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['widgetname'])."' widget=1 AND locked=0 LIMIT 1";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['widgetname'])."' AND widget=1 AND locked=0 LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) <= 0)
@@ -241,7 +241,7 @@ function doRemoveWidget()
 	if (!empty($errors))
 		return $errors;
 
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['remove'])."' widget=1 AND locked=0 LIMIT 1";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['remove'])."' AND widget=1 AND locked=0 LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) <= 0)
