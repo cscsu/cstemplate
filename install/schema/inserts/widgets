@@ -1,4 +1,4 @@
 INSERT INTO `<!--[dbprefix]-->pages` (`id`, `name`, `widget`, `locked`) VALUES
 (1, 'chome', 1),
-(2, 'courseinfo', 1,1);
+(2, 'courseinfo', 1,1),
 (2, 'schedule', 1,1);
