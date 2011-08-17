@@ -1,21 +1,124 @@
 <div id= "classInfo">
-<h4>CS192 Information</h4>
-  <dl>
-	<dt>Instructors:</dt>
-	<dd><a href="<?echo $teacherSite2;?>"><?echo $teacherName2;?></a><br />
-	Office: CSB Room 272 <br />
-	Office Hours: Friday 9:00 - 11:50<br />
-	Email: bartlett@cs.colostate.edu</dd>
-	<br />
-	<dd><a href="<?echo $teacherSite;?>"><?echo $teacherName;?></a><br />
-	Office: CSB Room 278 <br />
-	Office Hours: Friday 9:00 - 11:50<br />
-	Email: regelson@cs.colostate.edu</dd>
-	<dt>Lecture:</dt>
-	<dd>Mon &amp; Wed 9:00 - 9:50 CSB 215</dd>
-	<dd>Mon &amp; Wed 10:00 - 10:50 CSB 215</dd>
-	<dd>Mon &amp; Wed 11:00 - 11:50 CSB 215</dd>
-	<dt>Extra lab time:</dt>
-	<dd>Fri 9:00 - 11:50 CSB 120</dd>
- </dl>
+<h4>Course Information</h4>
+  <div class="classinfocontainer">
+	<!--[if count($instructors) gt 0]-->
+	<div class="classinfo_main">Instructors:</div>
+	<!--[foreach from=$instructors item=instructor]-->
+	   <div class="classinfo_set">
+			<!--[if $instructor.url ne ""]-->
+				<div class="classinfo_instructor">
+					<a href="<!--[$instructor.url]-->"><!--[$instructor.name]--></a>
+				</div>
+			<!--[else]-->
+				<div class="classinfo_instructor">
+					<!--[$instructor.name]-->
+				</div>
+			<!--[/if]-->
+
+			<!--[if $instructor.office ne ""]-->
+				<div class="classinfo_location">
+					<div class="classinfo_heading">Office</div>
+					<div class="classinfo_value"> <!--[$instructor.office]--></div>
+				</div>
+			<!--[/if]-->
+
+			<!--[if $instructor.email ne ""]-->
+				<div class="classinfo_email">
+					<div class="classinfo_heading">Email</div>
+					<div class="classinfo_value"><!--[$instructor.email]--></div>
+				</div>
+			<!--[/if]-->
+
+
+			<!--[if $instructor.officehours]-->
+				<div class="classinfo_officehours">
+					<div class="classinfo_iheading">Office Hours</div>
+					<!--[foreach from=$instructor.officehours item=hours]-->
+						<div class="classinfo_time"><!--[$hours.day|capitalize]--> <!--[$hours.start]--> - <!--[$hours.end]--></div>
+					<!--[/foreach]-->
+				</div>
+			<!--[/if]-->
+
+	   </div>
+	<!--[/foreach]-->
+	<!--[/if]-->
+  </div>
+  <div class="classinfocontainer">
+	<!--[if count($gtas) gt 0]-->
+	<div class="classinfo_main">GTAs:</div>
+	<!--[foreach from=$gtas item=instructor]-->
+		<div class="classinfo_set">
+			<!--[if $instructor.url ne ""]-->
+					<div class="classinfo_instructor">
+						<a href="<!--[$instructor.url]-->"><!--[$instructor.name]--></a>
+					</div>
+			<!--[else]-->
+					<div class="classinfo_instructor">
+						<!--[$instructor.name]-->
+					</div>
+			<!--[/if]-->
+
+
+			<!--[if $instructor.office ne ""]-->
+				<div class="classinfo_location">
+					<div class="classinfo_heading">Office</div>
+					<div class="classinfo_value"><!--[$instructor.office]--></div>
+				</div>
+			<!--[/if]-->
+
+			<!--[if $instructor.email ne ""]-->
+				<div class="classinfo_email">
+					<div class="classinfo_heading">Email</div>
+					<div class="classinfo_value"><!--[$instructor.email]--></div>
+				</div>
+			<!--[/if]-->
+			<!--[if $instructor.officehours]-->
+				<div class="classinfo_officehours">
+				<div class="classinfo_iheading">Office Hours</div>
+				<!--[foreach from=$instructor.officehours item=hours]-->
+					<div class="classinfo_time"><!--[$hours.day|capitalize]--> <!--[$hours.start]--> - <!--[$hours.end]--></div>
+				<!--[/foreach]-->
+				</div>
+			<!--[/if]-->
+		</div>
+	<!--[/foreach]-->
+	<!--[/if]-->
+  </div>
+  <div class="classinfocontainer">
+	<!--[if count($sections) gt 0]-->
+	<div class="classinfo_main">Sections:</div>
+	<!--[foreach from=$sections item=section]-->
+		<div class="classinfo_set">
+			<div class="classinfo_section">
+			<div class="classinfo_heading">Section Number</div>
+			<div class="classinfo_value"><!--[$section.number]--></div>
+			</div>
+			<!--[if count($section.lectures) > 0 ]-->
+				<div class="classinfo_meetingset">
+				<div class="classinfo_iheading">Lectures</div>
+				<!--[foreach from=$section.lectures item=hours]-->
+					<div class="classinfo_time"><!--[$hours.day|capitalize]--> <!--[$hours.start]--> - <!--[$hours.end]--> [<!--[$hours.location]-->]</div>
+				<!--[/foreach]-->
+				</div>
+			<!--[/if]-->
+			<!--[if count($section.labs) > 0 ]-->
+				<div class="classinfo_meetingset">
+				<div class="classinfo_iheading">Labs</div>
+				<!--[foreach from=$section.labs item=hours]-->
+					<div class="classinfo_time"><!--[$hours.day|capitalize]--> <!--[$hours.start]--> - <!--[$hours.end]--> [<!--[$hours.location]-->]</div>
+				<!--[/foreach]-->
+				</div>
+			<!--[/if]-->
+			<!--[if count($section.recits) > 0 ]-->
+				<div class="classinfo_meetingset">
+				<div class="classinfo_iheading">Recitations</div>
+				<!--[foreach from=$section.recits item=hours]-->
+					<div class="classinfo_time"><!--[$hours.day|capitalize]--> <!--[$hours.start]--> - <!--[$hours.end]--> [<!--[$hours.location]-->]</div>
+				<!--[/foreach]-->
+				</div>
+			<!--[/if]-->
+		</div>
+	<!--[/foreach]-->
+	<!--[/if]-->
+   </div>
 </div> 

@@ -1,23 +1,19 @@
 
 <div class="ctbl">
 <a name="registered_users"></a>
-<table class="ctbl" summary="Current Users">
-<caption class="ctbl">Current Users</caption>
-<thead class="ctbl">
-<tr class="ctbl">
-<th class="ctbl" scope="col" id="c1">Name</th>
-<th class="ctbl" scope="col" id="c2">Email</th>
-<th cclass="ctbl" scope="col" id="c3">Action</th>
+<table class="users" summary="Current Users">
+<caption class="users">Current Users</caption>
+<thead>
+<tr class="users">
+<th scope="col" id="c1">Name</th>
+<th scope="col" id="c2">Email</th>
 </tr>
-</thead>
-<tbody class="ctbl">
+<thead>
+<tbody>
 <!--[foreach from=$siteusers item=cuser]-->
-<tr class="ctbl">
-<th class="ctbl" scope="row"><!--[$cuser.firstname]--> <!--[$cuser.lastname]--></th>
-<td class="ctbl"><!--[$cuser.email]--></td>
-<td class="ctbl"><a href="?page=users&remove=<!--[$cuser.userid]-->">
-	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Delete User" /></a>
-</td>
+<tr>
+<th scope="row"><!--[$cuser.firstname]--> <!--[$cuser.lastname]--></th>
+<td><!--[$cuser.email]--></td>
 </tr>
 <!--[/foreach]-->
 </tbody>
@@ -30,10 +26,8 @@
 <form action="?page=users" name="Add User Form" title="Add User Form" method="post">
 <fieldset>
 <legend>Add User</legend>
-<div class="fieldcontrainer">
 <div class="field"><label for="email">Email:</label> <input id="email"  class="input" type="text" name="email" value="<!--[$adduser_email]-->" /></div>
 <div class="field"><label for="submit">Send Registration Token</label><input type="submit" id="submit" class="input" type="submit" name="submit" value="Submit" /></div>
-</div>
 </fieldset>
 </form>
 

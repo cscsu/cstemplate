@@ -1,20 +1,23 @@
 <div class="ctbl">
 <a name="pages"></a>
-<table class="page" summary="Current Pages">
-<caption class="users">Current Pages</caption>
-<thead>
-<tr class="users">
-<th scope="col" id="c1">Name</th>
-<th scope="col" id="c2">Title</th>
-<th scope="col" id="c2">Action</th>
+<table class="ctbl" summary="Current Pages">
+<caption class="ctbl">Current Pages</caption>
+<thead class="ctbl">
+<tr class="ctbl">
+<th class="ctbl" scope="col" id="c1">Name</th>
+<th class="ctbl" scope="col" id="c2">Title</th>
+<th class="ctbl" scope="col" id="c2">Action</th>
 </tr>
-<thead>
-<tbody>
+</thead>
+<tbody class="ctbl">
 <!--[foreach from=$pages item=page]-->
-<tr>
-<th scope="row"><!--[$page.name]--></th>
-<td><!--[$page.title]--></td>
-<td><a href="?page=pages&edit=<!--[$page.name]-->">Edit</a></td>
+<tr class="ctbl">
+<th class="ctbl" scope="row"><!--[$page.name]--></th>
+<td class="ctbl"><!--[$page.title]--></td>
+<td class="ctbl">
+<a href="?page=pages&edit=<!--[$page.name]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/edit.png" alt="Edit Page" /></a> |
+<a href="?page=pages&remove=<!--[$page.name]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Delete Page" /></a>
+</td>
 </tr>
 <!--[/foreach]-->
 </tbody>
@@ -27,17 +30,28 @@
 <span class="error"><!--[$error]--></span><br/>
 <!--[/foreach]-->
 <form action="?page=pages&edit=<!--[$page_pagename]-->" name="Edit Page Form" title="Edit Page Form" method="post">
+
 <input type="hidden" name="pagename" id="pagename" value="<!--[$editpage_pagename]-->" />
 <fieldset>
 <legend>Edit Page</legend>
-<div class="field"><label for="spagename">Page Name:</label> <input id="spagename" disabled="disabled" class="input" type="text" name="pagename" value="<!--[$editpage_pagename]-->" /></div>
+<div class="fieldcontrainer">
+<div class="field"><label for="spagename">Page Name:</label> <input id="spagename" disabled="disabled" class="input" type="text" name="spagename" value="<!--[$editpage_pagename]-->" /></div>
 <div class="field"><label for="pagetitle">Page Title:</label> <input id="pagetitle"  class="input" type="text" name="pagetitle" value="<!--[$editpage_pagetitle]-->" /></div>
-<div class="field"><label for="pagecontent">Content (html):</label><textarea id="pagecontent" class="input" rows="30" cols="70" name="pagecontent"><!--[$editpage_pagecontent]--></textarea></div>
+<div class="field"><label for="pagecontent">Content (html):</label>
+<div class="widgetset">
+<ul>
+<!--[foreach from=$widgets item=widget]-->
+<li>Widget: <!--[$widget.name]--> <a href="javascript:void(0);" id="add_widget_<!--[$widget.name]-->">Insert this widget</a></li>
+<!--[/foreach]-->
+<ul>
+</div>
+<textarea id="pagecontent" class="input" rows="30" cols="70" name="pagecontent"><!--[$editpage_pagecontent]--></textarea></div>
 <div class="field"><label for="submit">Edit Page</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" /></div>
+</div>
 </fieldset>
 </form>
 </div>
-<!--[/if]-->
+<!--[else]-->
 <div class="form"><h2>Add Page</h2>
 <!--[foreach from=$errors item=error]-->
 <span class="error"><!--[$error]--></span><br/>
@@ -45,10 +59,20 @@
 <form action="?page=pages" name="Add Page Form" title="Add Page Form" method="post">
 <fieldset>
 <legend>Add Page</legend>
+<div class="fieldcontrainer">
 <div class="field"><label for="pagename">Page Name [a-z0-9] only:</label> <input id="pagename"  class="input" type="text" name="pagename" value="<!--[$page_pagename]-->" /></div>
 <div class="field"><label for="pagetitle">Page Title:</label> <input id="pagetitle"  class="input" type="text" name="pagetitle" value="<!--[$page_pagetitle]-->" /></div>
-<div class="field"><label for="pagecontent">Content (html):</label><textarea id="pagecontent" class="input" rows="30" cols="70" name="pagecontent"><!--[$page_pagecontent]--></textarea></div>
+<div class="field"><label for="pagecontent">Content (html):</label>
+<div class="widgetset">
+<ul>
+<!--[foreach from=$widgets item=widget]-->
+<li>Widget: <!--[$widget.name]--> <a href="javascript:void(0);" id="add_widget_<!--[$widget.name]-->">Insert this widget</a></li>
+<!--[/foreach]-->
+<ul>
+</div><textarea id="pagecontent" class="input" rows="30" cols="70" name="pagecontent"><!--[$page_pagecontent]--></textarea></div>
 <div class="field"><label for="submit">Add Page</label><input type="submit" id="submit" class="input" type="submit" name="submit_add" value="Submit" /></div>
+</div>
 </fieldset>
 </form>
 </div>
+<!--[/if]-->

@@ -1,0 +1,59 @@
+<div class="ctbl">
+<a name="pages"></a>
+<table class="ctbl" summary="Current Widgets">
+<caption class="ctbl">Current Widgets</caption>
+<thead class="ctbl">
+<tr class="ctbl">
+<th class="ctbl" scope="col" id="c1">Name</th>
+<th class="ctbl" scope="col" id="c2">Action</th>
+</tr>
+</thead>
+<tbody class="ctbl">
+<!--[foreach from=$widgets item=widget]-->
+<tr class="ctbl">
+<th class="ctbl" scope="row"><!--[$widget.name]--></th>
+<td class="ctbl">
+<a href="?page=widgets&edit=<!--[$widget.name]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/edit.png" alt="Edit Widget" /></a> |
+<a href="?page=widgets&remove=<!--[$widget.name]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Delete Widget" /></a>
+</td>
+</tr>
+<!--[/foreach]-->
+</tbody>
+</table>
+</div>
+
+<!--[if $edit eq true]-->
+<div class="form"><h2>Edit Widget</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=widgets&edit=<!--[$editwidget_widgetname]-->" name="Edit Widget Form" title="Edit Widget Form" method="post">
+
+<input type="hidden" name="widgetname" id="widgetname" value="<!--[$editwidget_widgetname]-->" />
+<fieldset>
+<legend>Edit Widget</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="swidgetname">Widget Name:</label> <input id="swidgetname" disabled="disabled" class="input" type="text" name="swidgetname" value="<!--[$editwidget_widgetname]-->" /></div>
+<div class="field"><label for="widgetcontent">Content (html):</label><textarea id="widgetcontent" class="input" rows="30" cols="70" name="widgetcontent"><!--[$editwidget_widgetcontent]--></textarea></div>
+<div class="field"><label for="submit">Edit Widget</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" /></div>
+</div>
+</fieldset>
+</form>
+</div>
+<!--[else]-->
+<div class="form"><h2>Add Widget</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=widgets" name="Add Widget Form" title="Add Widget Form" method="post">
+<fieldset>
+<legend>Add Widget</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="widgetname">Widget Name [a-z0-9] only:</label> <input id="widgetname"  class="input" type="text" name="widgetname" value="<!--[$widget_widgetname]-->" /></div>
+<div class="field"><label for="pagecontent">Content (html):</label><textarea id="widgetcontent" class="input" rows="30" cols="70" name="widgetcontent"><!--[$widget_widgetcontent]--></textarea></div>
+<div class="field"><label for="submit">Add Widget</label><input type="submit" id="submit" class="input" type="submit" name="submit_add" value="Submit" /></div>
+</div>
+</fieldset>
+</form>
+</div>
+<!--[/if]-->

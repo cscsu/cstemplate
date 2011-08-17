@@ -1,26 +1,82 @@
 <div id= "classSchedule">
+<dl>
 <!--[foreach from=$schedule item=week]-->
 	<dt><!--[$week.title]--></dt>
 	<dd>
 	<!--[foreach from=$week.days item=item]-->
 			<div class="scheduleitem">
-				<div class="scheduleday"><!--[$item.day]--></div>
+				<div class="scheduleday">
+					<!--[$item.day]-->
+					<!--[if $admin eq 1]-->
+						<a href="?page=schedule&edit=<!--[$item.id]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/edit.png" alt="Edit Day" /></a> | 
+						<a href="?page=schedule&remove=<!--[$item.id]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove Day" /></a>
+					<!--[/if]-->
+				</div>
+				<!--[if count($item.materials) gt 0]-->
 				<div class="schedulematerials">
 				<!--[foreach from=$item.materials item=material]-->
-				<div class="schedulematerialtitle"><!--[$material.title]--></div>
-				<div class="schedulematerialresource"><!--[$material.resource]--></div>
+					<div class="schedulematerial">
+					<!--[if $material.title ne ""]-->
+						<div class="schedulematerialtitle">
+							<!--[if strpos(strtolower($material.resource),"http://") === 0 || strpos(strtolower($material.resource),"https://") === 0]-->
+								<a href="<!--[$material.resource]-->"><!--[$material.title]--></a>
+							<!--[else]-->
+								<!--[$material.title]-->
+							<!--[/if]-->
+						</div>
+						
+					<!--[/if]-->
+					<!--[if $material.resource ne ""]-->
+						<!--[if strpos(strtolower($material.resource),"http://") !== 0 && strpos(strtolower($material.resource),"https://") !== 0]-->
+						<div class="schedulematerialresource">
+							<!--[$material.resource]-->
+						</div>
+						<!--[else]-->
+						<div class="schedulematerialresource">&nbsp;</div>
+						<!--[/if]-->
+					<!--[else]-->
+						<div class="schedulematerialresource">&nbsp;</div>
+					<!--[/if]-->
+					</div>
 				<!--[/foreach]-->
 				</div>
+				<!--[/if]-->
+				<!--[if count($item.readings) gt 0]-->
 				<div class="schedulereadings">
 				<!--[foreach from=$item.readings item=reading]-->
-					<div class="schedulereadingtitle"><!--[$reading.title]--></div>
-					<div class="schedulereadingresource"><!--[$reading.resource]--></div>
+					<div class="schedulereading">
+					<!--[if $reading.title ne ""]-->
+						<div class="schedulereadingtitle">
+							<!--[if strpos(strtolower($reading.resource),"http://") === 0 || strpos(strtolower($reading.resource),"https://") === 0]-->
+								<a href="<!--[$reading.resource]-->"><!--[$reading.title]--></a>
+							<!--[else]-->
+								<!--[$reading.title]-->
+							<!--[/if]-->
+						</div>
+						
+					<!--[/if]-->
+					<!--[if $reading.resource ne ""]-->
+						<!--[if strpos(strtolower($reading.resource),"http://") !== 0 && strpos(strtolower($reading.resource),"https://") !== 0]-->
+						<div class="schedulereadingresource">
+							<!--[$reading.resource]-->
+						</div>
+						<!--[else]-->
+						<div class="schedulreadingresource">&nbsp;</div>
+						<!--[/if]-->
+					<!--[else]-->
+						<div class="schedulreadingresource">&nbsp;</div>
+					<!--[/if]-->
+					</div>
 				<!--[/foreach]-->
 				</div>
+				<!--[/if]-->
+				<!--[if $item.notes ne ""]-->
 				<div class="schedulenotes"><!--[$item.notes]--></div>
+				<!--[/if]-->
 			</div>
 
 	<!--[/foreach]-->
 	</dd>
 <!--[/foreach]-->
+</dl>
 </div> 

@@ -1,52 +1,70 @@
 <div class="ctbl">
 <a name="pages"></a>
-<table class="page" summary="Current Menu">
-<caption class="users">Current Menu</caption>
-<thead>
-<tr class="users">
-<th scope="col" id="c1">Position</th>
-<th scope="col" id="c2">Page Name</th>
-<th scope="col" id="c3">Title</th>
-<th scope="col" id="c3">Requires Login</th>
-<th scope="col" id="c4">Action</th>
-<th score="col" id="c5">URL</th>
+<table class="ctbl" summary="Current Menu">
+<caption class="ctbl">Current Menu</caption>
+<thead class="ctbl">
+<tr class="ctbl">
+<th class="ctbl" scope="col" id="c1">Position</th>
+<th class="ctbl" scope="col" id="c2">Page Name</th>
+<th class="ctbl" scope="col" id="c3">Title</th>
+
+<th class="ctbl" scope="col" id="c3">Requires Login</th>
+<th class="ctbl" scope="col" id="c4">Action</th>
+
+<th class="ctbl" score="col" id="c5">URL</th>
 </tr>
-<thead>
-<tbody>
+</thead>
+<tbody class="ctbl">
 <!--[foreach from=$menuitems item=link]-->
-<tr>
-<th scope="row"><!--[$link.position]--></th>
-<th scope="row">
+<tr class="ctbl">
+<th class="ctbl" scope="row"><!--[$link.position]--></th>
+<th class="ctbl" scope="row">
 <!--[$link.name]-->
+ 
+
+<!--[if $link.direct eq 0]-->
+
+<a href="?page=pages&edit=<!--[$link.name]-->">
+	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/edit.png" alt="Edit" /></a>
+<!--[/if]-->
+
 </th>
-<td><!--[$link.title]--></td>
-<td>
+<td class="ctbl"><!--[$link.title]--></td>
+
+<td class="ctbl">
 <!--[if $link.rlogin eq 1]-->
 Yes
 <!--[else]-->
 No
 <!--[/if]-->
 </td>
-<td>
-<!--[if $link.direct eq 0]-->
-<a href="?page=pages&edit=<!--[$link.name]-->">Edit</a> |
-<!--[/if]-->
+<td class="ctbl">
+<a href="?page=navigation&edit=<!--[$link.id]-->">
+	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/editalt.png" alt="Edit Link" /></a> | 
+<a href="?page=navigation&remove=<!--[$link.id]-->">
+	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Delete Link" /></a> | 
 <!--[if $link.position gt 1]-->
-<a href="?page=navigation&up=<!--[$link.id]-->">Move Up</a>
+<a href="?page=navigation&up=<!--[$link.id]-->">
+	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/up.png" alt="Move Up" /></a>
+
 <!--[/if]--> 
 <!--[if $link.position lt $menuitems|@count]--> 
-<!--[if $link.position gt 1]-->
+
+	<!--[if $link.position gt 1]-->
 |
 <!--[/if]-->
- <a href="?page=navigation&down=<!--[$link.id]-->">Move Down</a><!--[/if]-->
+
+	<a href="?page=navigation&down=<!--[$link.id]-->">
+	<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/down.png" alt="Move Down" /></a><!--[/if]-->
 </td>
-<td>
+<td class="ctbl">
 <!--[if $link.direct eq 1]-->
 <!--[$link.durl]-->
 <!--[else]-->
-<!--[$config.siteurl]-->?page=<!--[$link.name]-->
+<!--[$config.siteurl]-->/?page=<!--[$link.name]-->
 <!--[/if]-->
 </td>
+
 </tr>
 <!--[/foreach]-->
 </tbody>
@@ -54,13 +72,76 @@ No
 </div>
 
 
+
+
+<!--[if $editplink]-->
+	<div class="form">
+	<h2>Edit Menu Item</h2>
+	<!--[foreach from=$errors item=error]-->
+		<span class="error"><!--[$error]--></span><br/>
+	<!--[/foreach]-->
+	<form action="?page=navigation" name="Edit Menu Item Form" title="Edit Menu Item Form" method="post">
+		<input type="hidden" name="linkid" value="<!--[$editlink.id]-->">
+		<fieldset>
+			<legend>Edit Menu Item</legend>
+			<div class="fieldcontrainer">
+			<div class="field">
+				<label for="name">Page Name:</label> 
+				<select class="input" name="pagename" id="pagename">
+				<!--[foreach from=$editpages item=page]-->
+					<option value="<!--[$page.name]-->"<!--[if $editlink.name eq $page.name]--> selected="selected"<!--[/if]-->><!--[$page.title]--> [<!--[$page.name]-->]</option>
+				<!--[/foreach]-->
+				</select>
+			</div>
+			<div class="field">
+				<label for="submit">Edit Link</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" />
+			</div>
+			</div>
+		</fieldset>
+	</form>
+	</div>
+<!--[elseif $editdlink]-->
+	<div class="form">
+		<h2>Edit Menu Item (Direct Link)</h2>
+		<!--[foreach from=$errors item=error]-->
+			<span class="error"><!--[$error]--></span><br/>
+		<!--[/foreach]-->
+		<form action="?page=navigation" name="Edit Menu Item (Direct Link) Form" title="Edit Menu Item (Direct Link) Form" method="post">
+			<input type="hidden" name="linkid" value="<!--[$editlink.id]-->">
+			<fieldset>
+				<legend>Edit Menu Item (Direct Link)</legend>
+
+				<div class="fieldcontrainer">
+				<div class="field">
+					<label for="linktitle">Link Title:</label>
+					<input id="linktitle"  class="input" type="text" name="linktitle" value="<!--[$editlink.title]-->" />
+				</div>
+
+				<div class="field">
+					<label for="linkurl">Link URL:</label>
+					
+<input id="linkurl"  class="input" type="text" name="linkurl" value="<!--[$editlink.url]-->" />
+				</div>
+				<div class="field">
+					<label for="submit">Edit Link</label>
+					<input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" />
+				</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+<!--[else]-->
+
+
+<!--[if count($availablepages) gt 0]-->
 <div class="form"><h2>Add Menu Item</h2>
-<!--[foreach from=$errors item=error]-->
+<!--[foreach from=$perrors item=error]-->
 <span class="error"><!--[$error]--></span><br/>
 <!--[/foreach]-->
 <form action="?page=navigation" name="Add Menu Item Form" title="Add Menu Item Form" method="post">
 <fieldset>
 <legend>Add Menu Item</legend>
+<div class="fieldcontrainer">
 <div class="field"><label for="name">Page Name:</label> 
 <select class="input" name="pagename" id="pagename">
 <!--[foreach from=$availablepages item=page]-->
@@ -68,39 +149,58 @@ No
 <!--[/foreach]-->
 </select>
 </div>
-<div class="field"><label for="pageposition">Insert After:</label>
+<div class="field"><label for="pageposition">Position:</label>
 <select class="input" name="pageposition" id="pageposition">
+<option value="0">Top</option>
 <!--[foreach from=$menuitems item=link]-->
-<option value="<!--[$link.position]-->"><!--[$link.title]--> [<!--[$link.name]-->]</option>
+<option value="<!--[$link.position]-->">After <!--[$link.title]--> [<!--[$link.name]-->]</option>
 <!--[/foreach]-->
 </select>
 </div>
 <div class="field"><label for="submit">Add Link</label><input type="submit" id="submit" class="input" type="submit" name="submit_plink" value="Submit" /></div>
+</div>
 </fieldset>
 </form>
+<!--[else]-->
+<p>Add pages to create page related menu items or add a direct link below</p>
+<!--[/if]-->
 </div>
 
 <div class="form"><h2>Add Menu Item (Direct Link)</h2>
-<!--[foreach from=$errors item=error]-->
+<!--[foreach from=$derrors item=error]-->
 <span class="error"><!--[$error]--></span><br/>
 <!--[/foreach]-->
 <form action="?page=navigation" name="Add Menu Item (Direct Link) Form" title="Add Menu Item (Direct Link) Form" method="post">
 <fieldset>
 <legend>Add Menu Item (Direct Link)</legend>
-<div class="field"><label for="linktitle">Link Title:</label> 
-<input id="linktitle"  class="input" type="text" name="linktitle" value="<!--[$dlink_title]-->" />
+
+<div class="fieldcontrainer">
+<div class="field">
+	<label for="linktitle">Link Title:</label> 
+
+	<input id="linktitle"  class="input" type="text" name="linktitle" value="<!--[$dlink_title]-->" />
 </div>
-<div class="field"><label for="linkurl">Link URL:</label> 
-<input id="linkurl"  class="input" type="text" name="linkurl" value="<!--[$dlink_url]-->" />
+
+<div class="field">
+	<label for="linkurl">Link URL:</label> 
+
+	<input id="linkurl"  class="input" type="text" name="linkurl" value="<!--[$dlink_url]-->" />
 </div>
-<div class="field"><label for="pageposition">Insert After:</label>
-<select class="input" name="pageposition" id="pageposition">
-<!--[foreach from=$menuitems item=link]-->
-<option value="<!--[$link.position]-->"><!--[$link.title]--> [<!--[$link.name]-->]</option>
-<!--[/foreach]-->
-</select>
+<div class="field">
+	<label for="pageposition">Position:</label>
+	<select class="input" name="pageposition" id="pageposition">
+	<option value="0">Top</option>
+	<!--[foreach from=$menuitems item=link]-->
+	<option value="<!--[$link.position]-->">After <!--[$link.title]--> [<!--[$link.name]-->]</option>
+	<!--[/foreach]-->
+	</select>
 </div>
-<div class="field"><label for="submit">Add Link</label><input type="submit" id="submit" class="input" type="submit" name="submit_dlink" value="Submit" /></div>
+<div class="field">
+	<label for="submit">Add Link</label>
+	<input type="submit" id="submit" class="input" type="submit" name="submit_dlink" value="Submit" />
+</div>
+</div>
 </fieldset>
 </form>
 </div>
+<!--[/if]-->
