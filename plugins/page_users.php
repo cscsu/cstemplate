@@ -7,7 +7,7 @@ if (!$user->isGuest())
 {
 
 
-	$query = "SELECT firstname,lastname,email FROM ".$db->prefix."users";
+	$query = "SELECT userid,firstname,lastname,email FROM ".$db->prefix."users";
 	$result = $db->query($query);
 	$siteusers = array();
 	if ($db->num_rows($result) > 0)
@@ -35,6 +35,18 @@ if (!$user->isGuest())
 
 		}
 	}
+	if (!empty($_GET['remove']))
+	{
+		$errors = doRemoveUser();
+
+		if (!empty($errors))
+
+		{
+
+			$render->assign("errors",$errors);
+
+		}
+	}
 	
 }
 else
@@ -43,7 +55,57 @@ else
 }
 
 
+function doRemoveUser()
+{
+	global $db;
+	global $config;
+	global $render;
+	global $user;
+	$errors = array();
 
+	$fields = validateFields($_GET, array("remove"=>true));
+
+
+	foreach ($fields as $key => $value)
+
+	{
+
+		if ($value === -1)
+
+			$errors[] = "Missing " . $key . " field";
+
+	}
+
+
+	if (intval($fields['remove']) == 1)
+	{
+		$errors[] = "The original account cannot be deleted";
+	}
+
+	if (!empty($errors))
+
+		return $errors;
+
+	$query = "SELECT * FROM ".$db->prefix."users WHERE userid='".intval($fields['remove'])."' LIMIT 1";
+	$result = $db->query($query);
+
+	if ($db->num_rows($result) <= 0)
+	{
+		$errors[] = "No such user exists";	
+	}
+
+	if (empty($errors))
+	{
+		
+		$query = "DELETE FROM ".$db->prefix."users WHERE userid='".intval($fields['remove'])."'";
+		$result = $db->query($query);
+		redirect("The user has been removed","?page=users");
+		return null;
+	}
+		
+	return $errors;
+
+}
 
 
 function doGenerateToken()
@@ -79,7 +141,6 @@ function doGenerateToken()
 		$errors[] = "A user already exists with that email address";	
 	}
 
-	// TODO handle brute force (captcha?)
 	if (empty($errors))
 	{
 		
