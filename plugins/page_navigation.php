@@ -52,7 +52,7 @@ if ($user->isGuest() != true)
 	$render->assign("menuitems",$links);
 
 	// Get all the available menu items
-	$query = "SELECT p.title as title, p.name as name FROM ".$db->prefix."pages as p LEFT JOIN ".$db->prefix."menu as m ON (m.pageid = p.id) WHERE m.pageid is NULL";
+	$query = "SELECT p.title as title, p.name as name FROM ".$db->prefix."pages as p LEFT JOIN ".$db->prefix."menu as m ON (m.pageid = p.id) WHERE p.widget=0 AND  m.pageid is NULL";
 	$result = $db->query($query);
 	$pages = array();
 	if ($db->num_rows($result) > 0)
@@ -75,7 +75,7 @@ if ($user->isGuest() != true)
 
 		{
 
-			$render->assign("errors",$errors);
+			$render->assign("derrors",$errors);
 
 		}
 	}
@@ -84,7 +84,35 @@ if ($user->isGuest() != true)
 	else if (!empty($_GET['remove']))
 	{
 
-		$errors = doRemoveLink();
+		$errors = doRemoveLink(intval($_GET['remove']),$links);
+
+		if (!empty($errors))
+
+		{
+
+			$render->assign("errors",$errors);
+
+		}
+	}
+	// Edit a link	
+	else if (!empty($_GET['edit']))
+	{
+
+		$errors = doPreEditLink(intval($_GET['edit']));
+
+		if (!empty($errors))
+
+		{
+
+			$render->assign("errors",$errors);
+
+		}
+	}
+	// Edit a link	
+	else if (!empty($_POST['submit_edit']))
+	{
+
+		$errors = doEditLink();
 
 		if (!empty($errors))
 
@@ -103,7 +131,7 @@ if ($user->isGuest() != true)
 		if (!empty($errors))
 
 		{
-			$render->assign("errors",$errors);
+			$render->assign("perrors",$errors);
 		
 		}
 	}
@@ -177,7 +205,7 @@ function doAddPageLink()
 	
 
 	// Insure a valid page position
-	if (intval($fields['pageposition']) < 1)
+	if (intval($fields['pageposition']) < 0)
 		
 		$errors[] = "Invalid page position";
 
@@ -188,7 +216,7 @@ function doAddPageLink()
 		return $errors;
 
 	// Insure that the page exists in the database
-	$query = "SELECT * FROM ".$db->prefix."pages WHERE name='".$db->escape($fields['pagename'])."' LIMIT 1";
+	$query = "SELECT * FROM ".$db->prefix."pages WHERE widget=0 AND name='".$db->escape($fields['pagename'])."' LIMIT 1";
 	$result = $db->query($query);
 
 	if ($db->num_rows($result) <= 0)
@@ -210,7 +238,7 @@ function doAddPageLink()
 		$result = $db->query($query);
 		
 		// Insert the item into the database
-		$query = "INSERT INTO ".$db->prefix."menu (pageid, position) VALUES('".intval($row['id'])."','".intval($fields['pageposition'])."')"; 
+		$query = "INSERT INTO ".$db->prefix."menu (pageid, position) VALUES('".intval($row['id'])."','".intval($fields['pageposition']+1)."')"; 
 		$result = $db->query($query);
 
 
@@ -244,15 +272,8 @@ function doAddDirectLink()
 	}
 
 
-	// Insure a valid page name
-	if (!preg_match("/^[a-zA-Z0-9_]+$/i",$fields['pagename']))
-	{
-		$errors[] = "Invalid page name";
-
-	}
-	
 	// Insure a valid page position
-	if (intval($fields['pageposition']) < 1)
+	if (intval($fields['pageposition']) < 0)
 		
 		$errors[] = "Invalid page position";
 
@@ -269,7 +290,7 @@ function doAddDirectLink()
 	$result = $db->query($query);
 	// Insert the link
 		
-	$query = "INSERT INTO ".$db->prefix."menu (pageid, position) VALUES('".intval($row['id'])."','".intval($fields['pageposition'])."')";
+	$query = "INSERT INTO ".$db->prefix."menu (pageid, position, direct, title, url) VALUES('0','".intval($fields['pageposition']+1)."','1','".$db->escape($fields['linktitle'])."','".$db->escape($fields['linkurl'])."')";
 	$result = $db->query($query);
 
 		
@@ -279,6 +300,274 @@ function doAddDirectLink()
 	return $errors;
 
 }
+
+
+// Remove a page
+function doPreEditLink($id)
+{
+	global $db;
+	global $config;
+	global $render;
+	global $user;
+	$errors = array();
+
+	if ($id <= 0)
+			$errors[] = "Invalid link id";
+
+	$query = "SELECT * FROM ".$db->prefix."menu WHERE id='".intval($id)."' LIMIT 1";
+	// Insure that the page exists in the database
+	$result = $db->query($query);
+
+	if ($db->num_rows($result) <= 0)
+	{
+		$errors[] = "A link with that id does not exist";	
+	}
+	else
+	{
+		$row = $db->fetch_assoc($result);
+		if (intval($row['direct']) == 1)
+		{
+			$render->assign("editdlink",1);
+		}
+		else
+		{
+
+
+			// Get all the available menu items
+			$query = "SELECT p.title as title, p.name as name FROM ".$db->prefix."pages as p LEFT JOIN ".$db->prefix."menu as m ON (m.pageid = p.id) WHERE p.widget=0 AND (m.pageid is NULL OR m.pageid='".intval($id)."')";
+			$result = $db->query($query);
+			$pages = array();
+			if ($db->num_rows($result) > 0)
+			{
+			
+				while ($row = $db->fetch_assoc($result))
+				{
+					$pages[] = $row;
+				}
+			}
+			$render->assign("editpages",$pages);
+
+			$render->assign("editplink",1);
+			$query = "SELECT p.name as name, m.position as position, m.id as id FROM ".$db->prefix."menu as m LEFT JOIN ".$db->prefix."pages as p ON (p.id = m.pageid)  WHERE p.widget=0 AND m.id='".intval($id)."' LIMIT 1";
+			$result = $db->query($query);
+			$row = $db->fetch_assoc($result);
+		}
+
+		$render->assign("editlink",$row);
+		return null;
+	}
+	return $errors;
+}
+
+
+
+// Add a direct link
+function doEditLink()
+{
+	global $db;
+	global $config;
+	global $render;
+	global $user;
+	$errors = array();
+	// Validate fields
+	$fields = validateFields($_POST, array("linkid"=>true));
+
+
+	foreach ($fields as $key => $value)
+
+	{
+
+		if ($value === -1)
+
+			$errors[] = "Missing " . $key . " field";
+
+	}
+
+
+
+	// Check for errors and return if there are any		
+	if (!empty($errors))
+		
+		return $errors;
+
+	// Insure that the page exists in the database
+	$query = "SELECT * FROM ".$db->prefix."menu WHERE id='".intval($fields['linkid'])."' LIMIT 1";
+	$result = $db->query($query);
+
+	if ($db->num_rows($result) <= 0)
+	{
+		$errors[] = "Invalid link id";	
+	}
+	$id = intval($fields['linkid']);
+
+		
+	// Check for erros and return
+	if (!empty($errors))
+
+		return $errors;
+
+	$row = $db->fetch_assoc($result);
+
+	if (intval($row['direct']) == 1)
+	{
+		// Validate fields
+		$fields = validateFields($_POST, array("linktitle"=>true,"linkurl"=>true));
+
+
+		foreach ($fields as $key => $value)
+
+		{
+
+			if ($value === -1)
+
+				$errors[] = "Missing " . $key . " field";
+
+		}
+
+
+
+		// Check for erros and return
+		if (!empty($errors))
+
+		return $errors;
+	
+		
+		$query = "UPDATE ".$db->prefix."menu SET title='".$db->escape($fields['linktitle'])."',url='".$db->escape($fields['linkurl'])."' WHERE id='".intval($id)."'";		
+		
+		$result = $db->query($query);
+	}
+	else
+	{
+
+
+		// Validate fields
+		$fields = validateFields($_POST, array("pagename"=>true));
+
+
+		foreach ($fields as $key => $value)
+
+		{
+
+			if ($value === -1)
+
+				$errors[] = "Missing " . $key . " field";
+
+		}
+
+
+
+		// Insure a valid page name
+		if (!preg_match("/^[a-zA-Z0-9_]+$/i",$fields['pagename']))
+		{
+			$errors[] = "Invalid page name";
+
+		}
+	
+
+		// Check for errors and return if there are any		
+		if (!empty($errors))
+		
+			return $errors;
+
+		// Insure that the page exists in the database
+		$query = "SELECT * FROM ".$db->prefix."pages WHERE widget=0 AND name='".$db->escape($fields['pagename'])."' LIMIT 1";
+		$result = $db->query($query);
+
+		if ($db->num_rows($result) <= 0)
+		{
+			$errors[] = "A page with that name does not exist";	
+		}
+
+
+		// Check for erros and return
+		if (!empty($errors))
+
+			return $errors;
+	
+		
+		$query = "UPDATE ".$db->prefix."menu SET pagename='".$db->escape($fields['pagename'])."' WHERE id='".intval($id)."'";		
+		
+		$result = $db->query($query);
+
+	}
+
+	
+	
+		
+	redirect("Menu item updated", "?page=navigation");
+
+		
+	return $errors;
+
+}
+
+
+
+// Remove a link
+function doRemoveLink($id, $links)
+{
+	global $db;
+	global $config;
+	global $render;
+	global $user;
+	$errors = array();
+
+	if ($id <= 0)
+			$errors[] = "Invalid link id";
+
+	$found = false;
+	
+	// Locate the position for the link
+	foreach ($links as $link)
+	
+	{
+		
+		if (intval($link['id']) == $id)
+		
+		{
+			
+			$found = true;
+			
+			$position = $link['position'];
+
+			break;
+		
+		}
+	
+	}
+	
+	
+	// If the position is not found we have an invalid link
+	if ($found == false)
+
+	{
+		$errors[] = "Invalid link id";
+
+	}
+	
+
+
+
+	if (!empty($errors))
+
+		return $errors;
+
+
+
+	// Update the link to the new position
+	$query = "DELETE FROM ".$db->prefix."menu WHERE id=".$id."";
+	$result = $db->query($query);
+
+	// Reorder the other links
+	$query = "UPDATE ".$db->prefix."menu SET position=position-1 WHERE position>=".(intval($position))."";
+	$result = $db->query($query);
+
+
+	redirect("The link has been removed","?page=navigation");
+
+}
+
+
 
 // Move a page up
 function doUpPage($id, $links)
