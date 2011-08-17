@@ -1,0 +1,490 @@
+<!--[widget name=courseinfo]-->
+<script>
+$(document).ready(function() {
+	   hideElements();
+});
+</script>
+<div class="form">
+<h2>Edit Course Information</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=course" name="Edit Course Form" title="Edit Course Form" method="post">
+<fieldset>
+	<legend>Edit Instructors</legend>
+	<div class="fieldcontainer">
+	<!--[counter start=-1 print=false]-->
+	<!--[foreach from=$item_instructorname item=instructor]-->
+		<!--[counter assign=pos]-->
+		<div id="add_instructor<!--[$pos]-->">
+		<a href="javascript:void(0);" id="show_instructor_<!--[$pos]-->" onClick="show('add_instructor',<!--[$pos]-->);"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>	
+		<a href="javascript:void(0);" id="remove_instructor_<!--[$pos]-->" onClick="remove('add_instructor',<!--[$pos]-->);"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+		
+		<div class="field">
+				<label for="instructorname">Instructor Fullname:</label>
+				<input id="instructorname"  class="input" type="text" name="instructor_name[<!--[$pos]-->]" value="<!--[$item_instructorname[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="instructorurl">Instructor URL:</label>
+				<input id="instructorurl"  class="inputlong" type="text" name="instructor_url[<!--[$pos]-->]" value="<!--[$item_instructorurl[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="instructoroffice">Instructor Office:</label>
+				<input id="instructoroffice"  class="inputlong" type="text" name="instructor_office[<!--[$pos]-->]" value="<!--[$item_instructoroffice[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="instructoremail">Instructor Email:</label>
+				<input id="instructoremail"  class="inputlong" type="text" name="instructor_email[<!--[$pos]-->]" value="<!--[$item_instructoremail[$pos]]-->" />
+			</div>
+			<fieldset>
+			<legend>Office Hours</legend>
+			<!--[counter name="officehours" start=-1 print=false]-->
+				<!--[foreach from=$item_officehoursday[$pos] item=officehour]-->
+				<!--[counter name="officehours" assign=opos]-->
+				<div id="add_iofficehours_<!--[$pos]-->_<!--[$opos]-->">
+				<a href="javascript:void(0);" id="show_iofficehour_<!--[$pos]-->_<!--[$opos]-->" onClick="show('add_iofficehours_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_iofficehour_<!--[$pos]-->_<!--[$opos]-->" onClick="remove('add_iofficehours_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+				
+				<div class="field">
+					<label for="iofficehoursday">Day:</label>
+					<select id="iofficehoursday"  class="input" name="instructor_iofficehours_day[<!--[$pos]-->][<!--[$opos]-->]">
+						<option value="sunday"<!--[ if $item_officehoursday[$pos][$opos] eq "sunday"]-->selected="selected"<!--[/if]-->>Sunday</option>
+						<option value="monday"<!--[ if $item_officehoursday[$pos][$opos] eq "monday"]-->selected="selected"<!--[/if]-->>Monday</option>
+						<option value="tuesday"<!--[ if $item_officehoursday[$pos][$opos] eq "tuesday"]-->selected="selected"<!--[/if]-->>Tuesday</option>
+						<option value="wednesday"<!--[ if $item_officehoursday[$pos][$opos] eq "wednesday"]-->selected="selected"<!--[/if]-->>Wednesday</option>
+						<option value="thursday"<!--[ if $item_officehoursday[$pos][$opos] eq "thursday"]-->selected="selected"<!--[/if]-->>Thursday</option>
+						<option value="friday"<!--[ if $item_officehoursday[$pos][$opos] eq "friday"]-->selected="selected"<!--[/if]-->>Friday</option>
+						<option value="saturday"<!--[ if $item_officehoursday[$pos][$opos] eq "saturday"]-->selected="selected"<!--[/if]-->>Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="iofficehoursstart">Start Time (eg "9:00 am"):</label>
+					<input id="iofficehoursstart"  class="input" type="text" name="instructor_iofficehours_start[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_officehoursstart[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="iofficehoursend">End Time (eg "10:00 am"):</label>
+					<input id="iofficehoursend"  class="input" type="text" name="instructor_iofficehours_end[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_officehoursend[$pos][$opos]]-->" />
+				</div>
+				</div>
+			<!--[/foreach]-->
+				<a href="javascript:void(0);" id="add_addiofficehours_<!--[$pos]-->">Add Additional Office Hours</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[foreachelse]-->
+
+		<div id="add_instructor0">
+			<a href="javascript:void(0);" id="show_instructor_0" onClick="show('add_instructor',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+			<a href="javascript:void(0);" id="remove_instructor_0" onClick="remove('add_instructor',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+			<div class="field">
+				<label for="instructorname">Instructor Fullname:</label>
+				<input id="instructorname"  class="input" type="text" name="instructor_name[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="instructorurl">Instructor URL:</label>
+				<input id="instructorurl"  class="inputlong" type="text" name="instructor_url[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="instructoroffice">Instructor Office:</label>
+				<input id="instructoroffice"  class="inputlong" type="text" name="instructor_office[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="instructoremail">Instructor Email:</label>
+				<input id="instructoremail"  class="inputlong" type="text" name="instructor_email[0]" value="" />
+			</div>
+			<fieldset>
+			<legend>Office Hours</legend>
+				<div id="add_iofficehours_0_0">
+				<a href="javascript:void(0);" id="show_iofficehour_0_0" onClick="show('add_iofficehours_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_iofficehour_0_0" onClick="remove('add_iofficehours_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+				<div class="field">
+					<label for="iofficehoursday">Day:</label>
+					<select id="iofficehoursday"  class="input" name="instructor_iofficehours_day[0][0]">
+						<option value="sunday">Sunday</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="iofficehoursstart">Start Time (eg "9:00 am"):</label>
+					<input id="iofficehoursstart"  class="input" type="text" name="instructor_iofficehours_start[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="iofficehoursend">End Time (eg "10:00 am"):</label>
+					<input id="iofficehoursend"  class="input" type="text" name="instructor_iofficehours_end[0][0]" value="" />
+				</div>
+				</div>
+				<a href="javascript:void(0);" id="add_addiofficehours_0">Add Additional Office Hours</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[/foreach]-->
+	<a href="javascript:void(0);" id="add_addinstructor">Add Additional Instructors</a><br/><br/>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Edit Teacher Assistants</legend>
+	<div class="fieldcontainer">
+	<!--[counter start=-1 print=false]-->
+	<!--[foreach from=$item_taname item=instructor]-->
+		<!--[counter assign=pos]-->
+		<div id="add_gta<!--[$pos]-->">
+		<a href="javascript:void(0);" id="show_gta_<!--[$pos]-->" onClick="show('add_gta',<!--[$pos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+		<a href="javascript:void(0);" id="remove_gta_<!--[$pos]-->" onClick="remove('add_gta',<!--[$pos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+	
+			<div class="field">
+				<label for="taname">Teacher Assistant Fullname:</label>
+				<input id="taname"  class="input" type="text" name="gta_name[<!--[$pos]-->]" value="<!--[$item_taname[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="taurl">Teacher Assistant URL:</label>
+				<input id="taurl"  class="inputlong" type="text" name="gta_url[<!--[$pos]-->]" value="<!--[$item_taurl[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="taoffice">Teacher Assistant Office:</label>
+				<input id="taoffice"  class="inputlong" type="text" name="gta_office[<!--[$pos]-->]" value="<!--[$item_taoffice[$pos]]-->" />
+			</div>
+			<div class="field">
+				<label for="taemail">Teacher Assistant Email:</label>
+				<input id="taemail"  class="inputlong" type="text" name="gta_email[<!--[$pos]-->]" value="<!--[$item_taemail[$pos]]-->" />
+			</div>
+			<fieldset>
+			<legend>Office Hours</legend>
+			<!--[counter name="officehours" start=-1 print=false]-->
+				<!--[foreach from=$item_taofficehoursday[$pos] item=officehour]-->
+				<!--[counter name="officehours" assign=opos]-->
+				<div id="add_tofficehours_<!--[$pos]-->_<!--[$opos]-->">
+				<a href="javascript:void(0);" id="show_tofficehour_<!--[$pos]-->_<!--[$opos]-->" onClick="show('add_tofficehours_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_tofficehour_<!--[$pos]-->_<!--[$opos]-->" onClick="remove('add_tofficehours_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="tofficehoursday">Day:</label>
+					<select id="tofficehoursday"  class="input" name="gta_tofficehours_day[<!--[$pos]-->][<!--[$opos]-->]">
+						<option value="sunday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "sunday"]-->selected="selected"<!--[/if]-->>Sunday</option>
+						<option value="monday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "monday"]-->selected="selected"<!--[/if]-->>Monday</option>
+						<option value="tuesday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "tuesday"]-->selected="selected"<!--[/if]-->>Tuesday</option>
+						<option value="wednesday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "wednesday"]-->selected="selected"<!--[/if]-->>Wednesday</option>
+						<option value="thursday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "thursday"]-->selected="selected"<!--[/if]-->>Thursday</option>
+						<option value="friday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "friday"]-->selected="selected"<!--[/if]-->>Friday</option>
+						<option value="saturday"<!--[ if $item_taofficehoursday[$pos][$opos] eq "saturday"]-->selected="selected"<!--[/if]-->>Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="tofficehoursstart">Start Time (eg "9:00 am"):</label>
+					<input id="tofficehoursstart"  class="input" type="text" name="gta_tofficehours_start[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_taofficehoursstart[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="tofficehoursend">End Time (eg "10:00 am"):</label>
+					<input id="tofficehoursend"  class="input" type="text" name="gta_tofficehours_end[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_taofficehoursend[$pos][$opos]]-->" />
+				</div>
+				</div>
+			<!--[/foreach]-->
+				<a href="javascript:void(0);" id="add_addtofficehours_<!--[$pos]-->">Add Additional Office Hours</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[foreachelse]-->
+		<div id="add_gta0">
+		<a href="javascript:void(0);" id="show_gta_0" onClick="show('add_gta',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+		<a href="javascript:void(0);" id="remove_gta_0" onClick="remove('add_gta',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+	
+			<div class="field">
+				<label for="gtaname">Teacher Assistant Fullname:</label>
+				<input id="gtaname"  class="input" type="text" name="gta_name[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="gtaurl">Teacher Assistant URL:</label>
+				<input id="gtaurl"  class="inputlong" type="text" name="gta_url[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="gtaoffice">Teacher Assistant Office:</label>
+				<input id="gtaoffice"  class="inputlong" type="text" name="gta_office[0]" value="" />
+			</div>
+			<div class="field">
+				<label for="gtaemail">Teacher Assistant Email:</label>
+				<input id="gtaemail"  class="inputlong" type="text" name="gta_email[0]" value="" />
+			</div>
+			<fieldset>
+			<legend>Office Hours</legend>
+				<div id="add_tofficehours_0_0">
+				<a href="javascript:void(0);" id="show_tofficehour_0_0" onClick="show('add_tofficehours_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_tofficehour_0_0" onClick="remove('add_tofficehours_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+				<div class="field">
+					<label for="tofficehoursday">Day:</label>
+					<select id="tofficehoursday"  class="input" name="gta_tofficehours_day[0][0]">
+						<option value="sunday">Sunday</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="tofficehoursstart">Start Time (eg "9:00 am"):</label>
+					<input id="tofficehoursstart"  class="input" type="text" name="gta_tofficehours_start[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="tofficehoursend">End Time (eg "10:00 am"):</label>
+					<input id="tofficehoursend"  class="input" type="text" name="gta_tofficehours_end[0][0]" value="" />
+				</div>
+				</div>
+				<a href="javascript:void(0);" id="add_addtofficehours_0">Add Additional Office Hours</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[/foreach]-->
+	<a href="javascript:void(0);" id="add_addgta">Add Additional Teacher Assistant</a><br/><br/>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Edit Sections</legend>
+	<div class="fieldcontainer">
+	<!--[counter start=-1 print=false]-->
+	<!--[foreach from=$item_sectionnumber item=section]-->
+		<!--[counter assign=pos]-->
+		<div id="add_section<!--[$pos]-->">
+		<a href="javascript:void(0);" id="show_section_<!--[$pos]-->" onClick="show('add_section',<!--[$pos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+		<a href="javascript:void(0);" id="remove_section_<!--[$pos]-->" onClick="remove('add_section',<!--[$pos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+	
+			<div class="field">
+				<label for="sectionnumber">Section Number:</label>
+				<input id="sectionnumber"  class="input" type="text" name="section_number[<!--[$pos]-->]" value="<!--[$item_sectionnumber[$pos]]-->" />
+			</div>
+			<fieldset>
+			<legend>Lecture Times</legend>
+
+			<!--[counter name="lecturetimes" start=-1 print=false]-->
+			<!--[foreach from=$item_lectureday[$pos] item=time]-->
+				<!--[counter name="lecturetimes" assign=opos]-->
+				<div id="add_lecture_<!--[$pos]-->_<!--[$opos]-->">
+				<a href="javascript:void(0);" id="show_lecture_<!--[$pos]-->_<!--[$opos]-->" onClick="show('add_lecture_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_lecture_<!--[$pos]-->_<!--[$opos]-->" onClick="remove('add_lecture_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="lectureday">Day:</label>
+					<select id="lectureday"  class="input" name="section_lecture_day[<!--[$pos]-->][<!--[$opos]-->]">
+						<option value="sunday"<!--[ if $item_lectureday[$pos][$opos] eq "sunday"]-->selected="selected"<!--[/if]-->>Sunday</option>
+						<option value="monday"<!--[ if $item_lectureday[$pos][$opos] eq "monday"]-->selected="selected"<!--[/if]-->>Monday</option>
+						<option value="tuesday"<!--[ if $item_lectureday[$pos][$opos] eq "tuesday"]-->selected="selected"<!--[/if]-->>Tuesday</option>
+						<option value="wednesday"<!--[ if $item_lectureday[$pos][$opos] eq "wednesday"]-->selected="selected"<!--[/if]-->>Wednesday</option>
+						<option value="thursday"<!--[ if $item_lectureday[$pos][$opos] eq "thursday"]-->selected="selected"<!--[/if]-->>Thursday</option>
+						<option value="friday"<!--[ if $item_lectureday[$pos][$opos] eq "friday"]-->selected="selected"<!--[/if]-->>Friday</option>
+						<option value="saturday"<!--[ if $item_lectureday[$pos][$opos] eq "saturday"]-->selected="selected"<!--[/if]-->>Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="lecturelocation">Location (eg "CSB 120"):</label>
+					<input id="lecturelocation"  class="inputlong" type="text" name="section_lecture_location[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_lecturelocation[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="lecturetimestart">Start Time (eg "9:00 am"):</label>
+					<input id="lecturetimestart"  class="input" type="text" name="section_lecture_start[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_lecturestart[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="lecturetimeend">End Time (eg "10:00 am"):</label>
+					<input id="lecturetimeend"  class="input" type="text" name="section_lecture_end[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_lectureend[$pos][$opos]]-->" />
+				</div>
+				</div>
+			<!--[/foreach]-->
+				<a href="javascript:void(0);" id="add_addlecture_<!--[$pos]-->">Add Additional Lecture</a><br/><br/>
+			</fieldset>
+			<fieldset>
+			<legend>Lab Times</legend>
+			<!--[counter name="labtimes" start=-1 print=false]-->
+				<!--[foreach from=$item_labday[$pos] item=time]-->
+				<!--[counter name="labtimes" assign=opos]-->
+				<div id="add_lab_<!--[$pos]-->_<!--[$opos]-->">
+				<a href="javascript:void(0);" id="show_lab_<!--[$pos]-->_<!--[$opos]-->" onClick="show('add_lab_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_lab_<!--[$pos]-->_<!--[$opos]-->" onClick="remove('add_lab_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="labday">Day:</label>
+					<select id="labday"  class="input" name="section_lab_day[<!--[$pos]-->][<!--[$opos]-->]">
+						<option value="sunday"<!--[ if $item_labeday[$pos][$opos] eq "sunday"]-->selected="selected"<!--[/if]-->>Sunday</option>
+						<option value="monday"<!--[ if $item_labday[$pos][$opos] eq "monday"]-->selected="selected"<!--[/if]-->>Monday</option>
+						<option value="tuesday"<!--[ if $item_labday[$pos][$opos] eq "tuesday"]-->selected="selected"<!--[/if]-->>Tuesday</option>
+						<option value="wednesday"<!--[ if $item_labday[$pos][$opos] eq "wednesday"]-->selected="selected"<!--[/if]-->>Wednesday</option>
+						<option value="thursday"<!--[ if $item_labday[$pos][$opos] eq "thursday"]-->selected="selected"<!--[/if]-->>Thursday</option>
+						<option value="friday"<!--[ if $item_labday[$pos][$opos] eq "friday"]-->selected="selected"<!--[/if]-->>Friday</option>
+						<option value="saturday"<!--[ if $item_labday[$pos][$opos] eq "saturday"]-->selected="selected"<!--[/if]-->>Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="lablocation">Location (eg "CSB 120"):</label>
+					<input id="lablocation"  class="inputlong" type="text" name="section_lab_location[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_lablocation[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="labtimestart">Start Time (eg "9:00 am"):</label>
+					<input id="labtimestart"  class="input" type="text" name="section_lab_start[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_labstart[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="labtimeend">End Time (eg "10:00 am"):</label>
+					<input id="labtimeend"  class="input" type="text" name="section_lab_end[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_labend[$pos][$opos]]-->" />
+				</div>
+				</div>
+			<!--[/foreach]-->
+				<a href="javascript:void(0);" id="add_addlab_<!--[$pos]-->">Add Additional Lab</a><br/><br/>
+			</fieldset>
+			<fieldset>
+			<legend>Recitation Times</legend>
+			<!--[counter name="recittimes" start=-1 print=false]-->
+				<!--[foreach from=$item_recitday[$pos] item=time]-->
+				<!--[counter name="recittimes" assign=opos]-->
+				<div id="add_recit_<!--[$pos]-->_<!--[$opos]-->">
+				<a href="javascript:void(0);" id="show_recit_<!--[$pos]-->_<!--[$opos]-->" onClick="show('add_recit_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_recit_<!--[$pos]-->_<!--[$opos]-->" onClick="remove('add_recit_',<!--[$pos]-->,<!--[$opos]-->)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="recitday">Day:</label>
+					<select id="recitday"  class="input" name="section_recit_day[<!--[$pos]-->][<!--[$opos]-->]">
+						<option value="sunday"<!--[ if $item_recitday[$pos][$opos] eq "sunday"]-->selected="selected"<!--[/if]-->>Sunday</option>
+						<option value="monday"<!--[ if $item_recitday[$pos][$opos] eq "monday"]-->selected="selected"<!--[/if]-->>Monday</option>
+						<option value="tuesday"<!--[ if $item_recitday[$pos][$opos] eq "tuesday"]-->selected="selected"<!--[/if]-->>Tuesday</option>
+						<option value="wednesday"<!--[ if $item_recitday[$pos][$opos] eq "wednesday"]-->selected="selected"<!--[/if]-->>Wednesday</option>
+						<option value="thursday"<!--[ if $item_recitday[$pos][$opos] eq "thursday"]-->selected="selected"<!--[/if]-->>Thursday</option>
+						<option value="friday"<!--[ if $item_recitday[$pos][$opos] eq "friday"]-->selected="selected"<!--[/if]-->>Friday</option>
+						<option value="saturday"<!--[ if $item_recitday[$pos][$opos] eq "saturday"]-->selected="selected"<!--[/if]-->>Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="recitlocation">Location (eg "CSB 120"):</label>
+					<input id="recitlocation"  class="inputlong" type="text" name="section_recit_location[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_recitlocation[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="recittimestart">Start Time (eg "9:00 am"):</label>
+					<input id="recittimestart"  class="input" type="text" name="section_recit_start[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_recitstart[$pos][$opos]]-->" />
+				</div>
+				<div class="field">
+					<label for="recittimeend">End Time (eg "10:00 am"):</label>
+					<input id="recittimeend"  class="input" type="text" name="section_recit_end[<!--[$pos]-->][<!--[$opos]-->]" value="<!--[$item_recitend[$pos][$opos]]-->" />
+				</div>
+				</div>
+			<!--[/foreach]-->
+				<a href="javascript:void(0);" id="add_addrecit_<!--[$pos]-->">Add Additional Recitation</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[foreachelse]-->
+			<div id="add_section0">
+		<a href="javascript:void(0);" id="show_section_0" onClick="show('add_section',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+		<a href="javascript:void(0);" id="remove_section_0" onClick="remove('add_section',0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+	
+			<div class="field">
+				<label for="sectionnumber">Section Number:</label>
+				<input id="sectionnumber"  class="input" type="text" name="section_number[0]" value="" />
+			</div>
+			<fieldset>
+			<legend>Lecture Times</legend>
+				<div id="add_lecture_0_0">
+				<a href="javascript:void(0);" id="remove_lecture_0_0" onClick="remove('add_lecture_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+				<a href="javascript:void(0);" id="show_lecture_0_0" onClick="show('add_lecture_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+
+				<div class="field">
+					<label for="lectureday">Day:</label>
+					<select id="lectureday"  class="input" name="section_lecture_day[0][0]">
+						<option value="sunday">Sunday</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="lecturelocation">Location (eg "CSB 120"):</label>
+					<input id="lecturelocation"  class="inputlong" type="text" name="section_lecture_location[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="lecturetimestart">Start Time (eg "9:00 am"):</label>
+					<input id="lecturetimestart"  class="input" type="text" name="section_lecture_start[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="lecturetimeend">End Time (eg "10:00 am"):</label>
+					<input id="lecturetimeend"  class="input" type="text" name="section_lecture_end[0][0]" value="" />
+				</div>
+				</div>
+				<a href="javascript:void(0);" id="add_addlecture_0">Add Additional Lecture</a><br/><br/>
+			</fieldset>
+			<fieldset>
+			<legend>Lab Times</legend>
+				<div id="add_lab_0_0">
+				<a href="javascript:void(0);" id="show_lab_0_0" onClick="show('add_lab_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_lab_0_0" onClick="remove('add_lab_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="labday">Day:</label>
+					<select id="labday"  class="input" name="section_lab_day[0][0]">
+						<option value="sunday">Sunday</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="lablocation">Location (eg "CSB 120"):</label>
+					<input id="lablocation"  class="inputlong" type="text" name="section_lab_location[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="labtimestart">Start Time (eg "9:00 am"):</label>
+					<input id="labtimestart"  class="input" type="text" name="section_lab_start[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="labtimeend">End Time (eg "10:00 am"):</label>
+					<input id="labtimeend"  class="input" type="text" name="section_lab_end[0][0]" value="" />
+				</div>
+				</div>
+				<a href="javascript:void(0);" id="add_addlab_0">Add Addition Lab</a><br/><br/>
+			</fieldset>
+			<fieldset>
+			<legend>Recitation Times</legend>
+				<div id="add_recit_0_0">
+				<a href="javascript:void(0);" id="show_recit_0_0" onClick="show('add_recit_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/show.png" alt="Show"></a>
+				<a href="javascript:void(0);" id="remove_recit_0_0" onClick="remove('add_recit_',0,0)"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Remove"></a>
+
+
+				<div class="field">
+					<label for="recittimeday">Day:</label>
+					<select id="recittimeday"  class="input" name="section_recit_day[0][0]">
+						<option value="sunday">Sunday</option>
+						<option value="monday">Monday</option>
+						<option value="tuesday">Tuesday</option>
+						<option value="wednesday">Wednesday</option>
+						<option value="thursday">Thursday</option>
+						<option value="friday">Friday</option>
+						<option value="saturday">Saturday</option>
+					</select>
+				</div>
+				<div class="field">
+					<label for="recitlocation">Location (eg "CSB 120"):</label>
+					<input id="recitlocation"  class="inputlong" type="text" name="section_recit_location[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="recittimestart">Start Time (eg "9:00 am"):</label>
+					<input id="recittimestart"  class="input" type="text" name="section_recit_start[0][0]" value="" />
+				</div>
+				<div class="field">
+					<label for="recittimeend">End Time (eg "10:00 am"):</label>
+					<input id="recittimeend"  class="input" type="text" name="section_recit_end[0][0]" value="" />
+				</div>
+				</div>
+				<a href="javascript:void(0);" id="add_addrecit_0">Add Additional Recitation</a><br/><br/>
+			</fieldset>
+		</div>
+	<!--[/foreach]-->
+	<a href="javascript:void(0);" id="add_addsection">Add Additional Sections</a><br/><br/>
+	<div class="field"><label for="submit">Update Course Information</label><input type="submit" id="submit" class="input" type="submit" name="submit_update" value="Submit" /></div>
+	</div>
+</fieldset>
+</form>
+</div>
