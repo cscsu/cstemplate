@@ -44,6 +44,7 @@ class gsRender extends Smarty {
         } else {
             $this->caching = false;
         }
+	$this->catching = false;
          // HTML cache directory
         $this->cache_dir = BASE_DIR . '/cache/gsRender';
 
