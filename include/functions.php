@@ -73,7 +73,7 @@ function validateFields($refArray,$wanted)
 	{
 		// Check if the input array contains an index with the same name
 		// and ensure that it's value is not empty
-		if (!empty($refArray[$key]) && trim($refArray[$key]) != "")
+		if (trim($refArray[$key]) != "")
 		{
 			$fields[$key] = $refArray[$key];
 		}
