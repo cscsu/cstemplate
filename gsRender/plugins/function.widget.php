@@ -14,8 +14,28 @@ function smarty_function_widget($params, &$smarty)
 {
     $name = (isset($params['name'])) ? $params['name'] : 'default';
     
-	include("./plugins/widget_" . $name . ".php");
-    return $smarty->fetch("widget_" .$name . ".htm");
+    if (!preg_match("/^[a-zA-Z0-9_]+$/i",$name))
+    {
+	return "";
+    }
+
+
+    if (file_exists("./plugins/widget_" . $name . ".php"))
+    {
+    	include("./plugins/widget_" . $name . ".php");
+    }
+    if ($smarty->template_exists("widget_" .$name . ".htm"))
+    {
+        return $smarty->fetch("widget_" .$name . ".htm");
+    }
+    else if ($smarty->template_exists("content/widget_" .$name . ".htm"))
+    {
+	return $smarty->fetch("content/widget_" .$name . ".htm");
+    }
+    else
+    {
+      return "";
+    }
     
 }
 
