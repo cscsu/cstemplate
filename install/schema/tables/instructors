@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->instructors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `office` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `ta` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
