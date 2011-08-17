@@ -45,11 +45,11 @@ Installation Instructions:
 		chmod templates/content to be writable and readable by the software
 			eg: chmod -R 711 templates/content
 		chmod config to be writable and readable by the software
-			eg: chmod -R 711 config
+			eg: chmod -R 511 config
 
 		chmod example script:
 			chmod -R 555 cs100
 			find ./cs100 -type f -name '*.php' -exec chmod 511 {} \;
 			chmod -R 711 cs100/cache
 			chmod -R 711 cs100/templates/content
-			chmod -R 711 cs100/config
+			chmod -R 511 cs100/config
