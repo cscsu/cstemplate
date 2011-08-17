@@ -204,3 +204,170 @@ ol.listSub{
 }
 
 
+.panelitem {
+	float:left;
+	margin: 1em;
+}
+
+fieldset {
+	margin-bottom: 2em;
+}
+
+.field label
+{
+	white-space: nowrap;
+	display:block;
+	margin-right: 100%;
+	font-weight: bold;
+}
+.field input,textarea,select
+{
+	margin-bottom: 1em;
+}
+.field inputlong
+{
+}
+
+#classSchedule {
+	background-color: #336600;
+	color: #FFFFFF;
+	padding-bottom: 1em;
+	max-width: 800px;
+	clear:both;
+	margin-left: 3em;
+}
+
+#classSchedule dt {
+	font-weight: bold;
+	font-size: 1.25em;
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+#classSchedule dd {
+	background-color: #347235;
+	width: 80%;
+}
+.scheduleday
+{
+	font-weight: bold;
+}
+.schedulematerials
+{
+	margin-left: 2em;
+	margin-bottom: 1em;
+	
+}
+.schedulematerial
+{
+	clear: both;
+	margin-bottom: .25em;
+	
+}
+.schedulematerialtitle
+{
+
+	float: left;
+	margin-right: .25em;
+	clear: both;
+}
+
+.schedulematerialtitle a
+{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+
+.schedulematerialresource
+{
+
+}
+.schedulereadings
+{
+	margin-left: 2em;
+	margin-bottom: 1em;
+	
+}
+.schedulereading
+{
+	clear: both;
+	margin-bottom: .25em;
+	
+}
+.schedulereadingtitle
+{
+
+	float:left;
+	margin-right: .25em;
+	clear: both
+}
+.schedulereadingtitle a
+{
+	color: #FFFFFF;
+	text-decoration: underline;
+}
+
+
+.schedulereadingresource
+{
+	
+}
+.schedulenotes
+{
+	margin-left: 2em;
+	padding: 1em 1em 1em 1em;
+	background-color: #347C2C;
+}
+
+.classinfocontainer {
+ 	margin-left: 1em;
+}
+
+.classinfo_set {
+ 	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+
+.classinfo_main {
+	font-weight: bold;
+}
+
+.classinfo_heading
+{
+	float: left;
+	font-weight: bold;
+	margin-right: 1em;
+}
+.classinfo_iheading
+{
+	font-weight: bold;
+}
+
+.classinfo_time
+{
+	margin-left: .75em;
+}
+
+.classinfo_value
+{
+	
+}
+
+
+
+table.ctbl {
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+	margin-left: 2em;
+}
+td.ctbl {
+	margin-left: 2em;
+	padding-left: 2em;
+}
+th.ctbl {
+	margin-left: 2em;
+	padding-left: 2em;
+}
+
