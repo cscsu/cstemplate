@@ -2,7 +2,7 @@
 global $db;
 global $config;
 global $render;
-$query = "SELECT * FROM ".$db->prefix."schedule ORDER BY date DESC";
+$query = "SELECT * FROM ".$db->prefix."schedule ORDER BY date ASC";
 $result = $db->query($query);
 $schedule = array();
 $curweek = array();
@@ -31,7 +31,7 @@ if ($db->num_rows($result) > 0)
 			$curweek['days'] = array();
 			$curweekend = $endday;
 		}
-		if ($endday > $curweekend)
+		if ($day > $curweekend)
 		{
 			$schedule[] = $curweek;
 			$curweek = array();
@@ -44,9 +44,9 @@ if ($db->num_rows($result) > 0)
 
 		$item = array();
 		$item['day'] = date("l",$time);
+		$item['id'] = intval($row['id']);
 		
-		
-		$resources = "SELECT * FROM ".$db->prefix."resources WHERE sid=".intval($row['id'])."";
+		$resources = "SELECT * FROM ".$db->prefix."resources WHERE sid=".intval($row['id'])." ORDER BY id ASC";
 		$resresult = $db->query($resources);
 		$materials = array();
 		$readings = array();
