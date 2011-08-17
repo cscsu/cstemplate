@@ -121,8 +121,8 @@ function writeConfig()
 	$errors = array();
 
 	// Insure that we can write to the config file
-	if (!is_writable(BASE_DIR . '/config/config.php'))
-		$errors[] = 'Cannot write to config please ensure it is chmodded to 777';
+	if (!is_writable(BASE_DIR . '/config'))
+		$errors[] = 'Cannot write to config please ensure it is chmodded to 711';
 	// Check for errors thus far
 	if (empty($errors))
 	{
@@ -170,7 +170,7 @@ function writeConfig()
 	$render->assign('style', 'default');
 	$render->assign('errors', $errors);
 	$render->assign('sitename', $sitename);
-	$render->assign('subname', $subname);
+	$render->assign('subsite', $subsite);
 	$render->assign('siteid', $siteid);
 	$render->assign('siteurl', $siteurl);
 	$render->assign('pagedir','../');
