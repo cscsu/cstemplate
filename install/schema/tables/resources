@@ -1,0 +1,9 @@
+
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->_resources` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `resource` text NOT NULL,
+  `type` tinyint(4) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
