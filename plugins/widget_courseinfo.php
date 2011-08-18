@@ -11,7 +11,7 @@ if ($db->num_rows($result) > 0)
 	while ($row = $db->fetch_assoc($result))
 	{
 		
-		$hoursq = "SELECT * FROM ".$db->prefix."hours WHERE id='".intval($row['id'])."' AND type=0";
+		$hoursq = "SELECT * FROM ".$db->prefix."hours WHERE sid='".intval($row['id'])."' AND type=0";
 		$hresult = $db->query($hoursq);
 		
 		$officehours = array();
