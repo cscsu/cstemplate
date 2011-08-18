@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Applying permissions to directory $1"
-chmod 755 $1
+chmod -R 755 $1
 cwd=`pwd`
 cd $1
 echo "Running git Update"
