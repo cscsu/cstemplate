@@ -389,7 +389,7 @@ function doAddAssignment()
 			$pinfo = getTokenPage($srow['token']);
 
 			
-			makePost($pinfo[0],$pinfo[1],"Assignment Released!", $fields['assignmentname'], $config['siteurl']."?page=assignment&id=".intval($fields['assignmentid']), $config['sitename'], $fields['assignmentpublishnotes'], $config['siteurl'] . "/styles/default/images/assignments.png");
+			makePost($pinfo[0],$pinfo[1],"Assignment Released!", $fields['assignmentname'], $config['siteurl']."?page=assignment&id=".intval($sid), $config['sitename'], $fields['assignmentpublishnotes'], $config['siteurl'] . "/styles/default/images/assignments.png");
 		}
 
 
