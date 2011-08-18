@@ -5,6 +5,7 @@ chmod 755 $1
 cwd=`pwd`
 cd $1
 echo "Running git Update"
+git config core.filemode false
 git pull
 cd $cwd
 echo "Reapplying permissions to directory $1"
