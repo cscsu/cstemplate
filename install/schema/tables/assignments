@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->assignments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(60) NOT NULL,
+  `release` TINYINT(1) NOT NULL,
+  `date` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

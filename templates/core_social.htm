@@ -1,0 +1,96 @@
+<h2>Social Networking Features</h2>
+<!--[if $facebooksetupcomplete]-->
+<p class="indented">You have successfully completed the facebook permission setup</p>
+<p class="indented">You're almost done!</p>
+
+
+<div class="form">
+<h2>Facebook</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=social" name="Social Setup Form" title="Social Setup Form" method="post">
+<fieldset>
+<legend>Facebook Course Page URL</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="pageurl">Facebook Page URL:</label> <input id="pageurl" class="input" type="text" name="pageurl" value="<!--[$fbpageurl]-->" /></div>
+<div class="field"><label for="submit">Update Page URL</label><input type="submit" id="submit" class="input" type="submit" name="submit" value="Submit" /></div>
+</div>
+</fieldset>
+</form>
+</div>
+
+
+
+<!--[else]-->
+<p class="indented">On this page you will be able to setup the social networking features for your course webiste
+Please follow the instructions below
+</p>
+<div id="facebookinstructions">
+<ul class="instructions">
+<li>
+Step 1<br/>
+<p class="indented">Goto <a href="http://www.facebook.com">www.facebook.com</a> and click "Create a Page" near the bottom </p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step1.png"  alt=""/>
+
+</li>
+
+<li>
+Step 2<br/>
+<p class="indented">Select Cause or Community</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step2.png"  alt=""/>
+
+</li>
+
+<li>
+Step3<br/>
+<p class="indented">Enter the course title eg "CSU - CS100"</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step3.png"  alt=""/>
+
+</li>
+
+<li>
+Step 4<br/>
+<p class="indented">Enter your account details or create a psuedo account (recommended)</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step4.png"  alt=""/>
+
+</li>
+
+<li>
+Step 5<br/>
+<p class="indented">You will receive a confirmation email, click the confirmation link inside</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step5.png"  alt=""/>
+
+</li>
+
+<li>
+Step 6<br/>
+<p class="indented">Upload a picture for your course or click continue</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step6.png"  alt=""/>
+
+</li>
+
+<li>
+Step 7<br/>
+<p class="indented">Click continue on this page</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step7.png"  alt=""/>
+
+</li>
+
+<li>
+Step 8<br/>
+<p class="indented">Enter some basic course information</p>
+<img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/fb_step8.png"  alt=""/>
+
+</li>
+
+<li>
+Step 9<br/>
+<p class="indented">Click the link below to grant the CS CSU Client Services application permissions to your course page. This is how the web site will interact with facebook</p>
+<a href="<!--[$permissionurl]-->">Setup Facebook Application Permissions</a>
+</li>
+
+</ul>
+
+</div>
+<!--[/if]-->

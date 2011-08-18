@@ -1,0 +1,89 @@
+<div class="ctbl">
+<a name="pages"></a>
+<table class="ctbl" summary="Current Assignments">
+<caption class="ctbl">Current Assignments</caption>
+<thead class="ctbl">
+<tr class="ctbl">
+<th class="ctbl" scope="col" id="c1">Name</th>
+<th class="ctbl" scope="col" id="c2">Status</th>
+<th class="ctbl" scope="col" id="c3">Due Date</th>
+<th class="ctbl" scope="col" id="c4">Action</th>
+</tr>
+</thead>
+<tbody class="ctbl">
+<!--[foreach from=$assignments item=assignment]-->
+<tr class="ctbl">
+<th class="ctbl" scope="row"><!--[$assignment.name]--></th>
+<td class="ctbl" scope="row"><!--[$assignment.release]--></td>
+<td class="ctbl" scope="row"><!--[$assignment.date]--></td>
+<td class="ctbl">
+<a href="?page=assignments&edit=<!--[$assignment.id]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/edit.png" alt="Edit Assignment" /></a> |
+<a href="?page=assignments&remove=<!--[$assignment.id]-->"><img src="<!--[$pagedir]-->styles/<!--[$config.style]-->/images/delete.png" alt="Delete Assignment" /></a>
+</td>
+</tr>
+<!--[/foreach]-->
+</tbody>
+</table>
+</div>
+
+<!--[if $edit eq true]-->
+<div class="form"><h2>Edit Assignment</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=assignments&edit=<!--[$editassignment_assignmentid]-->" name="Edit Assignment Form" title="Edit Assignment Form" method="post">
+
+<input type="hidden" name="assignmentid" id="assignmentid" value="<!--[$editassignment_assignmentid]-->" />
+<fieldset>
+<legend>Edit Assignment</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="assignmentname">Assignment Name:</label> <input id="assignmentname" class="input" type="text" name="assignmentname" value="<!--[$editassignment_assignmentname]-->" /></div>
+<div class="field">
+<label for="assignmentdate">Due Date:</label> 
+<input id="assignmentdate"  class="input" type="text" name="assignmentdate" value="<!--[$editassignment_assignmentdate]-->" /></div>
+<div class="field"><label for="assignmentcontent">Content (html):</label><textarea id="widgetcontent" class="input" rows="30" cols="70" name="assignmentcontent"><!--[$editassignment_assignmentcontent]--></textarea></div>
+<div class="field"><label for="assignmentrelease">Release</label> <input type="checkbox" id="assignmentrelease" class="input" <!--[if $editassignment_assignmentrelease eq "release"]-->checked="checked"<!--[/if]--> name="assignmentrelease" value="release" />Assignment Released</div>
+<!--[if $fb_enabled]-->
+<fieldset>
+<legend>Publish Update to Social Sites</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="assignmentpublish">Publish</label> <input type="checkbox" id="assignmentpublish" class="input" name="assignmentpublish" value="publish" />Publish this update (Note if you are releasing this assignment the publishing information will show it as a new release)</div>
+<div class="field"><label for="assignmentpublishnotes">Update Notes:</label> <input id="assignmentpublishnotes" class="input" type="text" name="assignmentpublishnotes" value="<!--[$editassignment_assignmentpublishnotes]-->" /></div>
+</div>
+</fieldset>
+<!--[/if]-->
+<div class="field"><label for="submit">Edit Assignment</label><input type="submit" id="submit" class="input" type="submit" name="submit_edit" value="Submit" /></div>
+</div>
+</fieldset>
+</form>
+</div>
+<!--[else]-->
+<div class="form"><h2>Add Assignment</h2>
+<!--[foreach from=$errors item=error]-->
+<span class="error"><!--[$error]--></span><br/>
+<!--[/foreach]-->
+<form action="?page=assignments" name="Add Assignment Form" title="Add Assignment Form" method="post">
+<fieldset>
+<legend>Add Assignment</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="assignmentname">Assignment Name:</label> <input id="assignmentname"  class="input" type="text" name="assignmentname" value="<!--[$assignment_assignmentname]-->" /></div>
+<div class="field">
+<label for="assignmentdate">Due Date:</label> 
+<input id="assignmentdate"  class="input" type="text" name="assignmentdate" value="<!--[$assignment_assignmentdate]-->" /></div>
+<div class="field"><label for="assignmentcontent">Content (html):</label><textarea id="assignmentcontent" class="input" rows="30" cols="70" name="assignmentcontent"><!--[$assignment_assignmentcontent]--></textarea></div>
+<div class="field"><label for="assignmentrelease">Release</label> <input type="checkbox" id="assignmentrelease" <!--[if $assignment_assignmentrelease eq "release"]-->checked="checked"<!--[/if]--> class="input" name="assignmentrelease" value="release" />Assignment Released</div>
+<!--[if $fb_enabled]-->
+<fieldset>
+<legend>Publish assignment to Social Sites</legend>
+<div class="fieldcontrainer">
+<div class="field"><label for="assignmentpublish">Publish:</label> <input type="checkbox" id="assignmentpublish" class="input" name="assignmentpublish" value="publish" <!--[if $assignment_assignmentpublish eq "publish"]-->checked="checked"<!--[/if]-->/>Publish this update</div>
+<div class="field"><label for="assignmentpublishnotes">Publishing Notes:</label> <input id="assignmentpublishnotes" class="input" type="text" name="assignmentpublishnotes" value="<!--[$assignment_assignmentpublishnotes]-->" /></div>
+</div>
+<!--[/if]-->
+</fieldset>
+<div class="field"><label for="submit">Add Assignment</label><input type="submit" id="submit" class="input" type="submit" name="submit_add" value="Submit" /></div>
+</div>
+</fieldset>
+</form>
+</div>
+<!--[/if]-->

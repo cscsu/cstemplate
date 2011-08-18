@@ -3,7 +3,11 @@ $(function() {
 		$( "#itemdate" ).datepicker();
 	
 });
+$(function() {
 
+		$( "#assignmentdate" ).datepicker();
+	
+});
 	$(document).ready(function() {
 
             $('#edit_addmaterial').click(function() {

@@ -1,0 +1,17 @@
+<div id= "classAssignments">
+<dl>
+<!--[foreach from=$assignments item=assignment]-->
+	<dt><!--[$assignment.name]--></dt>
+	<dd>
+			<div class="assignmentitem">
+				<div class="assignmentdue">
+					Due Date: <!--[$assignment.month]--> <!--[$assignment.day]-->
+				</div>
+				<div class="assignmentlink">
+					Assignment Page: <a href="<!--[$config.siteurl]-->/?page=assignment&id=<!--[$assignment.id]-->"><!--[$assignment.name]--></a>
+				</div>
+			</div>
+	</dd>
+<!--[/foreach]-->
+</dl>
+</div> 
