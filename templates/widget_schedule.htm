@@ -13,9 +13,13 @@
 					<!--[/if]-->
 				</div>
 				<!--[if count($item.materials) gt 0]-->
+
 				<div class="schedulematerials">
+				<ul>
 				<!--[foreach from=$item.materials item=material]-->
+					<li>
 					<div class="schedulematerial">
+
 					<!--[if $material.title ne ""]-->
 						<div class="schedulematerialtitle">
 							<!--[if strpos(strtolower($material.resource),"http://") === 0 || strpos(strtolower($material.resource),"https://") === 0]-->
@@ -24,7 +28,6 @@
 								<!--[$material.title]-->
 							<!--[/if]-->
 						</div>
-						
 					<!--[/if]-->
 					<!--[if $material.resource ne ""]-->
 						<!--[if strpos(strtolower($material.resource),"http://") !== 0 && strpos(strtolower($material.resource),"https://") !== 0]-->
@@ -38,12 +41,18 @@
 						<div class="schedulematerialresource">&nbsp;</div>
 					<!--[/if]-->
 					</div>
+					</li>
 				<!--[/foreach]-->
+				<ul>
 				</div>
+
 				<!--[/if]-->
+				
 				<!--[if count($item.readings) gt 0]-->
 				<div class="schedulereadings">
+				<ul>
 				<!--[foreach from=$item.readings item=reading]-->
+					<li>
 					<div class="schedulereading">
 					<!--[if $reading.title ne ""]-->
 						<div class="schedulereadingtitle">
@@ -67,7 +76,9 @@
 						<div class="schedulreadingresource">&nbsp;</div>
 					<!--[/if]-->
 					</div>
+					</li>
 				<!--[/foreach]-->
+				</ul>
 				</div>
 				<!--[/if]-->
 				<!--[if $item.notes ne ""]-->
