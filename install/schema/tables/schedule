@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->_schedule` (
+CREATE TABLE IF NOT EXISTS `<!--[dbprefix]-->schedule` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `notes` text NOT NULL,
   `date` varchar(50) NOT NULL,
