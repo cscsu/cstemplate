@@ -229,8 +229,8 @@ fieldset {
 }
 
 #classSchedule {
-	background-color: #336600;
-	color: #FFFFFF;
+	background-color: #FFFFFF;
+	color: #000000;
 	padding-bottom: 1em;
 	max-width: 800px;
 	clear:both;
@@ -239,12 +239,12 @@ fieldset {
 
 #classSchedule dt {
 	font-weight: bold;
-	font-size: 1.25em;
+	font-size: 1.5em;
 	margin-top: 1em;
 	margin-bottom: 1em;
 }
 #classSchedule dd {
-	background-color: #347235;
+	background-color: #CCFFBB;
 	width: 80%;
 }
 .scheduleday
@@ -273,7 +273,7 @@ fieldset {
 
 .schedulematerialtitle a
 {
-	color: #FFFFFF;
+	color: #900;
 	text-decoration: underline;
 }
 
@@ -303,7 +303,7 @@ fieldset {
 }
 .schedulereadingtitle a
 {
-	color: #FFFFFF;
+	color: #900;
 	text-decoration: underline;
 }
 
