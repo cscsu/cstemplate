@@ -15,7 +15,15 @@ if ($db->num_rows($result) > 0)
 		$month = date("F", $time);
 		$day = date("j",$time);
 		$row['month'] = $month;
+		
 		$row['day'] = $day;
+
+		$assignmentcontent = file_get_contents("templates/content/assignment_" . $row['id'] .".htm");		
+		if (strpos($assignmentcontent, "http://") === 0 || strpos($assignmentcontent, "https://") === 0)
+		{
+			$row['url'] = true;
+			$row['content'] = $assignmentcontent;
+		}
 		$assignments[] = $row;
 		
 	}

@@ -8,7 +8,12 @@
 					Due Date: <!--[$assignment.month]--> <!--[$assignment.day]-->
 				</div>
 				<div class="assignmentlink">
-					Assignment Page: <a href="<!--[$config.siteurl]-->/?page=assignment&id=<!--[$assignment.id]-->"><!--[$assignment.name]--></a>
+					Assignment Page: 
+					<!--[if $assignment.url]-->
+						<a href="<!--[$assignment.content]-->"><!--[$assignment.name]--></a>
+					<!--[else]-->
+						<a href="<!--[$config.siteurl]-->/?page=assignment&id=<!--[$assignment.id]-->"><!--[$assignment.name]--></a>
+					<!--[/if]-->
 				</div>
 			</div>
 	</dd>
