@@ -7,6 +7,7 @@ cd $1
 echo "Running git Update"
 git config core.filemode false
 git pull
+rm -r install/
 cd $cwd
 echo "Reapplying permissions to directory $1"
 chmod -R 555 $1
