@@ -15,7 +15,7 @@ if ($db->num_rows($result) > 0)
 		$time = mktime(1,1,1,intval($dateinfo['tm_mon'])+1,$dateinfo['tm_mday'],$dateinfo['tm_year']+1900);
 		$month = date("F", $time);
 
-			$curmonthnum = intval($dateinfo['tm_mon'])+1;
+		$curmonthnum = intval($dateinfo['tm_mon'])+1;
 		$endmonth = date("F", $time);
 		$maxdays = date("t", $time);
 		$day = date("j",$time) - $dateinfo['tm_wday'];
@@ -37,19 +37,10 @@ if ($db->num_rows($result) > 0)
 			$curweekend = $endday;
 		}
 		
-		echo $dateinfo['tm_mon']+1;
-		echo " ";
-		echo intval($curmonthnum);
-		echo "-";
-		echo intval($endmonthnum);
-		echo " ";
 
-		echo "?:" .(intval($curmonthnum) > intval($endmonthnum));
-		echo "||";		
 		
 		if ((intval($curmonthnum) > intval($endmonthnum)) || (intval($curmonthnum) == intval($endmonthnum) && $day > $curweekend))
 		{
-			echo "new week";
 			$schedule[] = $curweek;
 			$curweek = array();
 			$curweek["title"] = "Week of " . $month . " " . $day . " to " . $endmonth . " " . $endday;
