@@ -31,7 +31,7 @@ if ($db->num_rows($result) > 0)
 			$curweek['days'] = array();
 			$curweekend = $endday;
 		}
-		if ($day > $curweekend)
+		if ($month >= $endmonth && $day > $curweekend)
 		{
 			$schedule[] = $curweek;
 			$curweek = array();
